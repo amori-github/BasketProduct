@@ -6,7 +6,7 @@
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 
 require dirname(__DIR__, 3).'/vendor/autoload.php';
-require __DIR__.'/ContainerAx1e9z7/srcApp_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerDea48Mu/srcApp_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -21,6 +21,7 @@ $classes[] = 'Symfony\Bundle\MonologBundle\MonologBundle';
 $classes[] = 'Symfony\Bundle\DebugBundle\DebugBundle';
 $classes[] = 'Symfony\Bundle\MakerBundle\MakerBundle';
 $classes[] = 'Symfony\Bundle\WebServerBundle\WebServerBundle';
+$classes[] = 'Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle';
 $classes[] = 'Symfony\Component\HttpClient\TraceableHttpClient';
 $classes[] = 'Symfony\Contracts\HttpClient\HttpClientInterface';
 $classes[] = 'Symfony\Component\HttpClient\HttpClient';
@@ -29,6 +30,7 @@ $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\EventListener\ResolveControllerNameSubscriber';
 $classes[] = 'Symfony\Component\HttpFoundation\RequestMatcher';
 $classes[] = 'Symfony\Component\DependencyInjection\ServiceLocator';
+$classes[] = 'App\Repository\ProductRepository';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController';
 $classes[] = 'Symfony\Component\Cache\DoctrineProvider';
@@ -142,6 +144,10 @@ $classes[] = 'Symfony\Bridge\Doctrine\Logger\DbalLogger';
 $classes[] = 'Symfony\Bridge\Doctrine\ContainerAwareEventManager';
 $classes[] = 'Doctrine\DBAL\Logging\DebugStack';
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\Command\Proxy\EnsureProductionSettingsDoctrineCommand';
+$classes[] = 'Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand';
+$classes[] = 'Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader';
+$classes[] = 'App\DataFixtures\AppFixtures';
+$classes[] = 'App\DataFixtures\ProductFixture';
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\Command\Proxy\ConvertMappingDoctrineCommand';
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\Command\ImportMappingDoctrineCommand';
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\Command\Proxy\InfoDoctrineCommand';
