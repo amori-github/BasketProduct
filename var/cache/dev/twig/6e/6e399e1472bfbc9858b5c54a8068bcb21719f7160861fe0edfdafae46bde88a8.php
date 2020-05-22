@@ -115,9 +115,13 @@ class __TwigTemplate_c827d122c63d8f6473dcbbdca70c9ed3853c2b40034698e215ce73f7021
         echo " €
                         </h5>
                         <p class=\"card-text\">
-                        <form action=\"#\" method=\"get\">
-                            Quantité <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" name=\"qte\"/>
+                        <form action=\"";
+        // line 24
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("basket.add", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 24, $this->source); })()), "id", [], "any", false, false, false, 24)]), "html", null, true);
+        echo "\" method=\"get\">
+                            Quantité <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" value=\"1\" name=\"qte\"/>
                         </p>
+
                         <p class=\"card-text\">
                             <button class=\"btn btn-success btn-lg\" >Au panier!</button>
                         </p>
@@ -150,7 +154,7 @@ class __TwigTemplate_c827d122c63d8f6473dcbbdca70c9ed3853c2b40034698e215ce73f7021
 
     public function getDebugInfo()
     {
-        return array (  114 => 21,  104 => 14,  99 => 12,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  120 => 24,  114 => 21,  104 => 14,  99 => 12,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -178,9 +182,10 @@ class __TwigTemplate_c827d122c63d8f6473dcbbdca70c9ed3853c2b40034698e215ce73f7021
                             {{ product.prix }} €
                         </h5>
                         <p class=\"card-text\">
-                        <form action=\"#\" method=\"get\">
-                            Quantité <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" name=\"qte\"/>
+                        <form action=\"{{ path('basket.add', {'id': product.id}) }}\" method=\"get\">
+                            Quantité <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" value=\"1\" name=\"qte\"/>
                         </p>
+
                         <p class=\"card-text\">
                             <button class=\"btn btn-success btn-lg\" >Au panier!</button>
                         </p>

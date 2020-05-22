@@ -32,6 +32,24 @@ class Product
      */
     private $description;
 
+    private $quantity;
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+    public function calcTotalPrice(): float
+    {
+        return $this->quantity * $this->prix;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

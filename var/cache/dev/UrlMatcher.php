@@ -13,6 +13,8 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/basket' => [[['_route' => 'basket', '_controller' => 'App\\Controller\\BasketController::show'], null, null, null, false, false, null]],
+        '/clear' => [[['_route' => 'basket.clear', '_controller' => 'App\\Controller\\BasketController::clear'], null, null, null, false, false, null]],
         '/product' => [[['_route' => 'product.index', '_controller' => 'App\\Controller\\ProductController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
@@ -32,7 +34,9 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/product/show/([^/]++)(*:191)'
+                .'|/add/([^/]++)(*:182)'
+                .'|/remove/([^/]++)(*:206)'
+                .'|/product/show/([^/]++)(*:236)'
             .')/?$}sD',
     ],
     [ // $dynamicRoutes
@@ -43,7 +47,9 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        191 => [
+        182 => [[['_route' => 'basket.add', '_controller' => 'App\\Controller\\BasketController::add'], ['id'], null, null, false, true, null]],
+        206 => [[['_route' => 'basket.remove', '_controller' => 'App\\Controller\\BasketController::remove'], ['id'], null, null, false, true, null]],
+        236 => [
             [['_route' => 'product.show', '_controller' => 'App\\Controller\\ProductController::show'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
