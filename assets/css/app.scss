@@ -1,8 +1,6 @@
-// customize some Bootstrap variables
-$primary: darken(#428bca, 20%);
-
-// the ~ allows you to reference things in node_modules
-@import "~bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+//@import "~bootstrap/scss/bootstrap";
 .image-style {
   border-radius: 4px;
   width: 150px;

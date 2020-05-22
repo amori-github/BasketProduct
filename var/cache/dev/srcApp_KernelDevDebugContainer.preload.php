@@ -6,7 +6,7 @@
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 
 require dirname(__DIR__, 3).'/vendor/autoload.php';
-require __DIR__.'/ContainerHzpNzsu/srcApp_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerEzBvcD1/srcApp_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -32,6 +32,7 @@ $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\EventListener\ResolveControllerNameSubscriber';
 $classes[] = 'Symfony\Component\HttpFoundation\RequestMatcher';
 $classes[] = 'Symfony\Component\DependencyInjection\ServiceLocator';
+$classes[] = 'App\Controller\BasketController';
 $classes[] = 'App\Controller\ProductController';
 $classes[] = 'App\Repository\ProductRepository';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController';

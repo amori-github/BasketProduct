@@ -58,6 +58,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
         // line 9
         echo "    </head>
     <body>
+
     <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">
         <a class=\"navbar-brand\" href=\"#\">ChoosIt</a>
         <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
@@ -68,8 +69,8 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
             <ul class=\"navbar-nav mr-auto\">
                 <li class=\"nav-item\">
                     <a class=\"nav-link ";
-        // line 20
-        if (((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context)) && 0 === twig_compare((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context) ? $context["Current_menu"] : (function () { throw new RuntimeError('Variable "Current_menu" does not exist.', 20, $this->source); })()), "products"))) {
+        // line 21
+        if (((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context)) && 0 === twig_compare((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context) ? $context["Current_menu"] : (function () { throw new RuntimeError('Variable "Current_menu" does not exist.', 21, $this->source); })()), "products"))) {
             echo "active";
         }
         echo "\" href=\"";
@@ -83,12 +84,12 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
         </div>
     </nav>
         ";
-        // line 28
-        $this->displayBlock('body', $context, $blocks);
         // line 29
+        $this->displayBlock('body', $context, $blocks);
+        // line 30
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 32
+        // line 33
         echo "    </body>
 </html>
 ";
@@ -142,7 +143,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
     }
 
-    // line 28
+    // line 29
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -160,7 +161,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
     }
 
-    // line 29
+    // line 30
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -170,7 +171,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 30
+        // line 31
         echo "            ";
         echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("app");
         echo "
@@ -195,7 +196,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
     public function getDebugInfo()
     {
-        return array (  174 => 30,  164 => 29,  146 => 28,  133 => 7,  123 => 6,  104 => 5,  92 => 32,  89 => 29,  87 => 28,  72 => 20,  59 => 9,  57 => 6,  53 => 5,  47 => 1,);
+        return array (  175 => 31,  165 => 30,  147 => 29,  134 => 7,  124 => 6,  105 => 5,  93 => 33,  90 => 30,  88 => 29,  73 => 21,  59 => 9,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -210,6 +211,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
         {% endblock %}
     </head>
     <body>
+
     <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">
         <a class=\"navbar-brand\" href=\"#\">ChoosIt</a>
         <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
