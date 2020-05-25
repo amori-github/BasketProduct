@@ -7,6 +7,13 @@
 
         <h2>Mon panier</h2>
         <div class="col-md-10">
+            {% for type, flash_messages in app.session.flashBag.all %}
+                {% for msg in flash_messages %}
+                    <div class="alert alert-{{ type }}">
+                        {{ msg }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
 
             <table class="table table-striped table-hover">
                 <thead>
@@ -15,7 +22,7 @@
                     <th>prix</th>
                     <th>Quantité</th>
                     <th>Total</th>
-                    <th>sup</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -26,21 +33,25 @@
                 {% endif %}
 
                 {% for product in products  %}
-
+                    <form  action="{{ path('basket.add',{"id": product.id}) }}"  method="get">
                     <tr>
                         <td>{{ product.nom }}</td>
                         <td>{{ product.prix }}</td>
-                        <td>{{ product.quantity }}</td>
-                        <td>{{ product.calcTotalPrice }} €</td>
 
                         <td class="form-inline">
+                            {{ product.quantity }}&nbsp;
+                            <input class="form-control" type="number" style="width: 25%" max="99" min="1" name="qte" onchange="this.form.submit()"/>
                             <a href="{{ path('basket.remove', {'id': product.id}) }}">
                                 <i  class="fa fa-trash"></i>
                             </a>
                         </td>
 
-                    </tr>
+                        <td>{{ product.calcTotalPrice }} €</td>
 
+
+
+                    </tr>
+                    </form>
 
                 {% endfor %}
                 </tbody>

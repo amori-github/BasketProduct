@@ -4,6 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+
 /**
  * Represents the basket in the session
  */
@@ -36,6 +37,7 @@ class Basket implements \Countable
         ];
 
         $this->session->set('products', $products);
+
     }
 
     public function update(Product $product, int $quantity)
@@ -118,6 +120,14 @@ class Basket implements \Countable
         }
 
         return $quantity;
+    }
+    public function nbarticle(): int
+    {
+        $nbarticle = 0;
+        if ($this->all()) {
+            $nbarticle = count($this->all());
+        }
+        return $nbarticle;
     }
 
     public function totalPrice(array $products): float
