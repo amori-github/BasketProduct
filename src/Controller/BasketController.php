@@ -8,9 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class BasketController extends AbstractController
 {
@@ -56,17 +55,13 @@ class BasketController extends AbstractController
 
         if ($product->getId()) {
             $this->basket->add($product);
+            $this->addFlash('success', 'Le produit est ajouté avec succès !');
         }
 
         if ($request->query->get('qte') != null){
             $qte = $request->query->get('qte');
             $this->basket->update($product ,$qte );
         }
-
-
-
-
-
 
         return $this->redirectToRoute('basket', [
             'id' => $product->getId(),
@@ -94,5 +89,15 @@ class BasketController extends AbstractController
        $this->basket->clear();
        return $this->redirectToRoute('basket');
     }
+
+    public function nbarticle()
+    {
+        $nbarticles = $this->basket->nbarticle();
+        return $this->render('basket/nbarticle.html.twig',[
+            "articles" => $nbarticles
+        ]);
+    }
+
+
 
 }

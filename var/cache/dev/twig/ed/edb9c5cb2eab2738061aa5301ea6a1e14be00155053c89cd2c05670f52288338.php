@@ -80,7 +80,10 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
             </ul>
 
-
+            ";
+        // line 26
+        echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragment(Symfony\Bridge\Twig\Extension\HttpKernelExtension::controller("App\\Controller\\BasketController::nbarticle"));
+        echo "
         </div>
     </nav>
         ";
@@ -196,7 +199,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
     public function getDebugInfo()
     {
-        return array (  175 => 31,  165 => 30,  147 => 29,  134 => 7,  124 => 6,  105 => 5,  93 => 33,  90 => 30,  88 => 29,  73 => 21,  59 => 9,  57 => 6,  53 => 5,  47 => 1,);
+        return array (  178 => 31,  168 => 30,  150 => 29,  137 => 7,  127 => 6,  108 => 5,  96 => 33,  93 => 30,  91 => 29,  85 => 26,  73 => 21,  59 => 9,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -226,7 +229,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
             </ul>
 
-
+            {{ render(controller('App\\\\Controller\\\\BasketController::nbarticle')) }}
         </div>
     </nav>
         {% block body %}{% endblock %}
