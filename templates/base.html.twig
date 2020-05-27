@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">ChoosIt</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    {% endblock %}
+</head>
+<body>
+<header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">ChoosIt</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link {% if Current_menu is defined and Current_menu == 'products' %}active{% endif %}" href="{{ path('product.index') }}">Catalogue</a>
-                </li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link {% if Current_menu is defined and Current_menu == 'products' %}active{% endif %}"
+                   href="{{ path('product.index') }}">Catalogue</a>
+            </li>
 
-            </ul>
+        </ul>
 
-            {{ render(controller('App\\Controller\\BasketController::nbarticle')) }}
+
+    </div>
+    {#assurez-vous d'activer esi dans la config/packages/framework.yaml#}
+    {{ render_esi(url('basket.nbarticle')) }}
+    {#<a class="basket-link mx-2" href="{{ path('basket') }}">
+        <i class="fas fa-shopping-cart"></i>
+        <div class="basket-count d-flex justify-content-center align-items-center">
+           <span class="text-white">
+                {{ render(controller('App\\Controller\\BasketController::nbarticle')) }}
+           </span>
         </div>
-    </nav>
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </body>
+    </a>#}
+
+
+
+
+</nav>
+</header>
+{% block body %}{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+
+{% endblock %}
+</body>
 </html>

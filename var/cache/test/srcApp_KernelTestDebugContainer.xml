@@ -11,7 +11,6 @@
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="TwigBundle">Symfony\Bundle\TwigBundle\TwigBundle</parameter>
-      <parameter key="TwigExtraBundle">Twig\Extra\TwigExtraBundle\TwigExtraBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
       <parameter key="DoctrineMigrationsBundle">Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle</parameter>
@@ -19,7 +18,6 @@
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="MonologBundle">Symfony\Bundle\MonologBundle\MonologBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
-      <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
       <parameter key="WebpackEncoreBundle">Symfony\WebpackEncoreBundle\WebpackEncoreBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
     </parameter>
@@ -31,10 +29,6 @@
       <parameter key="TwigBundle" type="collection">
         <parameter key="path">/opt/lampp/htdocs/BasketProduct/vendor/symfony/twig-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\TwigBundle</parameter>
-      </parameter>
-      <parameter key="TwigExtraBundle" type="collection">
-        <parameter key="path">/opt/lampp/htdocs/BasketProduct/vendor/twig/extra-bundle/src</parameter>
-        <parameter key="namespace">Twig\Extra\TwigExtraBundle</parameter>
       </parameter>
       <parameter key="SensioFrameworkExtraBundle" type="collection">
         <parameter key="path">/opt/lampp/htdocs/BasketProduct/vendor/sensio/framework-extra-bundle/src</parameter>
@@ -63,10 +57,6 @@
       <parameter key="DebugBundle" type="collection">
         <parameter key="path">/opt/lampp/htdocs/BasketProduct/vendor/symfony/debug-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\DebugBundle</parameter>
-      </parameter>
-      <parameter key="DoctrineFixturesBundle" type="collection">
-        <parameter key="path">/opt/lampp/htdocs/BasketProduct/vendor/doctrine/doctrine-fixtures-bundle</parameter>
-        <parameter key="namespace">Doctrine\Bundle\FixturesBundle</parameter>
       </parameter>
       <parameter key="WebpackEncoreBundle" type="collection">
         <parameter key="path">/opt/lampp/htdocs/BasketProduct/vendor/symfony/webpack-encore-bundle/src</parameter>
@@ -287,10 +277,6 @@
         <parameter>twig</parameter>
         <parameter>@WebProfiler/Collector/twig.html.twig</parameter>
       </parameter>
-      <parameter key="data_collector.http_client" type="collection">
-        <parameter>http_client</parameter>
-        <parameter>@WebProfiler/Collector/http_client.html.twig</parameter>
-      </parameter>
       <parameter key="data_collector.doctrine" type="collection">
         <parameter>db</parameter>
         <parameter>@Doctrine/Collector/db.html.twig</parameter>
@@ -332,12 +318,16 @@
         <argument type="service" id=".service_locator.vdmMuyE.App\Controller\ProductController"/>
       </call>
     </service>
-    <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true">
-      <tag name="doctrine.fixture.orm"/>
+    <service id="App\Controller\TestController" class="App\Controller\TestController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Repository\ProductRepository"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.vdmMuyE.App\Controller\TestController"/>
+      </call>
     </service>
-    <service id="App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" autoconfigure="true">
-      <tag name="doctrine.fixture.orm"/>
-    </service>
+    <service id="App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" autoconfigure="true"/>
     <service id="App\Repository\ProductRepository" class="App\Repository\ProductRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -540,7 +530,7 @@
       <argument type="tagged_iterator" tag="container.env_var_loader"/>
     </service>
     <service id="fragment.handler" class="Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler" public="false">
-      <argument type="service" id=".service_locator._cmka45"/>
+      <argument type="service" id=".service_locator.0nodIsM"/>
       <argument type="service" id="request_stack"/>
       <argument>true</argument>
     </service>
@@ -548,6 +538,15 @@
       <tag name="kernel.fragment_renderer" alias="inline"/>
       <argument type="service" id="http_kernel"/>
       <argument type="service" id="debug.event_dispatcher"/>
+      <call method="setFragmentPath">
+        <argument>/_fragment</argument>
+      </call>
+    </service>
+    <service id="fragment.renderer.esi" class="Symfony\Component\HttpKernel\Fragment\EsiFragmentRenderer" public="false">
+      <tag name="kernel.fragment_renderer" alias="esi"/>
+      <argument type="service" id="esi" on-invalid="null"/>
+      <argument type="service" id="fragment.renderer.inline"/>
+      <argument type="service" id="uri_signer"/>
       <call method="setFragmentPath">
         <argument>/_fragment</argument>
       </call>
@@ -1023,8 +1022,6 @@
     <service id="test.private_services_locator" class="Symfony\Component\DependencyInjection\ServiceLocator" public="true">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\DataFixtures\AppFixtures" type="service" id="App\DataFixtures\AppFixtures" on-invalid="ignore_uninitialized"/>
-        <argument key="App\DataFixtures\ProductFixture" type="service" id="App\DataFixtures\ProductFixture" on-invalid="ignore_uninitialized"/>
         <argument key="App\Repository\ProductRepository" type="service" id="App\Repository\ProductRepository" on-invalid="ignore_uninitialized"/>
         <argument key="Doctrine\Common\Annotations\Reader" type="service" id="annotations.cached_reader" on-invalid="ignore_uninitialized"/>
         <argument key="Doctrine\Common\Persistence\ManagerRegistry" type="service" id="doctrine" on-invalid="ignore_uninitialized"/>
@@ -1042,7 +1039,6 @@
         <argument key="Psr\Log\LoggerInterface $debugLogger" type="service" id="monolog.logger.debug" on-invalid="ignore_uninitialized"/>
         <argument key="Psr\Log\LoggerInterface $doctrineLogger" type="service" id="monolog.logger.doctrine" on-invalid="ignore_uninitialized"/>
         <argument key="Psr\Log\LoggerInterface $eventLogger" type="service" id="monolog.logger.event" on-invalid="ignore_uninitialized"/>
-        <argument key="Psr\Log\LoggerInterface $httpClientLogger" type="service" id="monolog.logger.http_client" on-invalid="ignore_uninitialized"/>
         <argument key="Psr\Log\LoggerInterface $phpLogger" type="service" id="monolog.logger.php" on-invalid="ignore_uninitialized"/>
         <argument key="Psr\Log\LoggerInterface $profilerLogger" type="service" id="monolog.logger.profiler" on-invalid="ignore_uninitialized"/>
         <argument key="Psr\Log\LoggerInterface $requestLogger" type="service" id="monolog.logger.request" on-invalid="ignore_uninitialized"/>
@@ -1119,7 +1115,6 @@
         <argument key="Symfony\Contracts\Cache\CacheInterface" type="service" id="cache.app" on-invalid="ignore_uninitialized"/>
         <argument key="Symfony\Contracts\Cache\TagAwareCacheInterface" type="service" id="cache.app.taggable" on-invalid="ignore_uninitialized"/>
         <argument key="Symfony\Contracts\EventDispatcher\EventDispatcherInterface" type="service" id="debug.event_dispatcher" on-invalid="ignore_uninitialized"/>
-        <argument key="Symfony\Contracts\HttpClient\HttpClientInterface" type="service" id=".debug.http_client" on-invalid="ignore_uninitialized"/>
         <argument key="Symfony\Contracts\Translation\TranslatorInterface" type="service" id="translator.data_collector" on-invalid="ignore_uninitialized"/>
         <argument key="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface" type="service" id="webpack_encore.entrypoint_lookup_collection" on-invalid="ignore_uninitialized"/>
         <argument key="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" type="service" id="webpack_encore.entrypoint_lookup[_default]" on-invalid="ignore_uninitialized"/>
@@ -1134,7 +1129,7 @@
         <argument key="annotations.reader" type="service" id="annotations.reader" on-invalid="ignore_uninitialized"/>
         <argument key="argument_metadata_factory" type="service" id="argument_metadata_factory" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver" type="service" id="debug.argument_resolver" on-invalid="ignore_uninitialized"/>
-        <argument key="argument_resolver.controller_locator" type="service" id=".service_locator.BanRksc" on-invalid="ignore_uninitialized"/>
+        <argument key="argument_resolver.controller_locator" type="service" id=".service_locator.CHzA9bY" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver.default" type="service" id="debug.argument_resolver.default" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver.not_tagged_controller" type="service" id="debug.argument_resolver.not_tagged_controller" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver.request" type="service" id="debug.argument_resolver.request" on-invalid="ignore_uninitialized"/>
@@ -1218,7 +1213,6 @@
         <argument key="data_collector.exception" type="service" id="data_collector.exception" on-invalid="ignore_uninitialized"/>
         <argument key="data_collector.form" type="service" id="data_collector.form" on-invalid="ignore_uninitialized"/>
         <argument key="data_collector.form.extractor" type="service" id="data_collector.form.extractor" on-invalid="ignore_uninitialized"/>
-        <argument key="data_collector.http_client" type="service" id="data_collector.http_client" on-invalid="ignore_uninitialized"/>
         <argument key="data_collector.logger" type="service" id="data_collector.logger" on-invalid="ignore_uninitialized"/>
         <argument key="data_collector.memory" type="service" id="data_collector.memory" on-invalid="ignore_uninitialized"/>
         <argument key="data_collector.request" type="service" id="data_collector.request" on-invalid="ignore_uninitialized"/>
@@ -1285,8 +1279,6 @@
         <argument key="doctrine.dbal.logger.profiling.default" type="service" id="doctrine.dbal.logger.profiling.default" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.dbal.well_known_schema_asset_filter" type="service" id="doctrine.dbal.well_known_schema_asset_filter" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.ensure_production_settings_command" type="service" id="doctrine.ensure_production_settings_command" on-invalid="ignore_uninitialized"/>
-        <argument key="doctrine.fixtures.loader" type="service" id="doctrine.fixtures.loader" on-invalid="ignore_uninitialized"/>
-        <argument key="doctrine.fixtures_load_command" type="service" id="doctrine.fixtures_load_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.mapping_convert_command" type="service" id="doctrine.mapping_convert_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.mapping_import_command" type="service" id="doctrine.mapping_import_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.mapping_info_command" type="service" id="doctrine.mapping_info_command" on-invalid="ignore_uninitialized"/>
@@ -1338,6 +1330,8 @@
         <argument key="error_renderer" type="service" id="error_handler.error_renderer.serializer" on-invalid="ignore_uninitialized"/>
         <argument key="error_renderer.html" type="service" id="twig.error_renderer.html" on-invalid="ignore_uninitialized"/>
         <argument key="error_renderer.serializer" type="service" id="error_handler.error_renderer.serializer" on-invalid="ignore_uninitialized"/>
+        <argument key="esi" type="service" id="esi" on-invalid="ignore_uninitialized"/>
+        <argument key="esi_listener" type="service" id="esi_listener" on-invalid="ignore_uninitialized"/>
         <argument key="exception_listener" type="service" id="exception_listener" on-invalid="ignore_uninitialized"/>
         <argument key="file_locator" type="service" id="file_locator" on-invalid="ignore_uninitialized"/>
         <argument key="form.choice_list_factory" type="service" id="form.choice_list_factory.cached" on-invalid="ignore_uninitialized"/>
@@ -1364,11 +1358,11 @@
         <argument key="form.type_guesser.doctrine" type="service" id="form.type_guesser.doctrine" on-invalid="ignore_uninitialized"/>
         <argument key="form.type_guesser.validator" type="service" id="form.type_guesser.validator" on-invalid="ignore_uninitialized"/>
         <argument key="fragment.handler" type="service" id="fragment.handler" on-invalid="ignore_uninitialized"/>
+        <argument key="fragment.renderer.esi" type="service" id="fragment.renderer.esi" on-invalid="ignore_uninitialized"/>
         <argument key="fragment.renderer.inline" type="service" id="fragment.renderer.inline" on-invalid="ignore_uninitialized"/>
         <argument key="framework_extra_bundle.argument_name_convertor" type="service" id="framework_extra_bundle.argument_name_convertor" on-invalid="ignore_uninitialized"/>
         <argument key="framework_extra_bundle.date_time_param_converter" type="service" id="framework_extra_bundle.date_time_param_converter" on-invalid="ignore_uninitialized"/>
         <argument key="framework_extra_bundle.event.is_granted" type="service" id="framework_extra_bundle.event.is_granted" on-invalid="ignore_uninitialized"/>
-        <argument key="http_client" type="service" id=".debug.http_client" on-invalid="ignore_uninitialized"/>
         <argument key="identity_translator" type="service" id="identity_translator" on-invalid="ignore_uninitialized"/>
         <argument key="knp_paginator.helper.processor" type="service" id="knp_paginator.helper.processor" on-invalid="ignore_uninitialized"/>
         <argument key="knp_paginator.subscriber.filtration" type="service" id="knp_paginator.subscriber.filtration" on-invalid="ignore_uninitialized"/>
@@ -1413,7 +1407,6 @@
         <argument key="monolog.logger.debug" type="service" id="monolog.logger.debug" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.logger.doctrine" type="service" id="monolog.logger.doctrine" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.logger.event" type="service" id="monolog.logger.event" on-invalid="ignore_uninitialized"/>
-        <argument key="monolog.logger.http_client" type="service" id="monolog.logger.http_client" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.logger.php" type="service" id="monolog.logger.php" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.logger.profiler" type="service" id="monolog.logger.profiler" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.logger.request" type="service" id="monolog.logger.request" on-invalid="ignore_uninitialized"/>
@@ -1613,7 +1606,6 @@
         <argument key="twig.loader.native_filesystem" type="service" id="twig.loader.native_filesystem" on-invalid="ignore_uninitialized"/>
         <argument key="twig.mailer.message_listener" type="service" id="twig.mailer.message_listener" on-invalid="ignore_uninitialized"/>
         <argument key="twig.mime_body_renderer" type="service" id="twig.mime_body_renderer" on-invalid="ignore_uninitialized"/>
-        <argument key="twig.missing_extension_suggestor" type="service" id="twig.missing_extension_suggestor" on-invalid="ignore_uninitialized"/>
         <argument key="twig.profile" type="service" id="twig.profile" on-invalid="ignore_uninitialized"/>
         <argument key="twig.runtime.httpkernel" type="service" id="twig.runtime.httpkernel" on-invalid="ignore_uninitialized"/>
         <argument key="twig.runtime.security_csrf" type="service" id="twig.runtime.security_csrf" on-invalid="ignore_uninitialized"/>
@@ -1903,25 +1895,25 @@
     </service>
     <service id="mailer.transport_factory.abstract" class="Symfony\Component\Mailer\Transport\AbstractTransportFactory" abstract="true">
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="http_client" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger" on-invalid="ignore"/>
     </service>
     <service id="mailer.transport_factory.null" class="Symfony\Component\Mailer\Transport\NullTransportFactory">
       <tag name="mailer.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument>null</argument>
       <argument type="service" id="monolog.logger" on-invalid="ignore"/>
     </service>
     <service id="mailer.transport_factory.sendmail" class="Symfony\Component\Mailer\Transport\SendmailTransportFactory">
       <tag name="mailer.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument>null</argument>
       <argument type="service" id="monolog.logger" on-invalid="ignore"/>
     </service>
     <service id="mailer.transport_factory.smtp" class="Symfony\Component\Mailer\Transport\Smtp\EsmtpTransportFactory">
       <tag name="mailer.transport_factory" priority="-100"/>
       <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument>null</argument>
       <argument type="service" id="monolog.logger" on-invalid="ignore"/>
     </service>
     <service id="validator.builder" class="Symfony\Component\Validator\ValidatorBuilder" public="false">
@@ -1988,7 +1980,7 @@
     </service>
     <service id="validator.not_compromised_password" class="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator" public="false">
       <tag name="validator.constraint_validator" alias="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator"/>
-      <argument type="service" id=".debug.http_client" on-invalid="null"/>
+      <argument>null</argument>
       <argument>UTF-8</argument>
       <argument>false</argument>
       <argument>null</argument>
@@ -1999,6 +1991,12 @@
       <argument type="service" id="property_info"/>
       <argument type="service" id="property_info"/>
       <argument>null</argument>
+    </service>
+    <service id="esi" class="Symfony\Component\HttpKernel\HttpCache\Esi" public="false"/>
+    <service id="esi_listener" class="Symfony\Component\HttpKernel\EventListener\SurrogateListener" public="false">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="esi" on-invalid="ignore"/>
     </service>
     <service id="translator.default" class="Symfony\Bundle\FrameworkBundle\Translation\Translator" public="false">
       <tag name="kernel.locale_aware"/>
@@ -2335,8 +2333,6 @@
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/FrameworkBundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/vendor/symfony/twig-bundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/TwigBundle/translations</argument>
-          <argument>/opt/lampp/htdocs/BasketProduct/vendor/twig/extra-bundle/src/translations</argument>
-          <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/TwigExtraBundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/vendor/sensio/framework-extra-bundle/src/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/SensioFrameworkExtraBundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/vendor/doctrine/doctrine-bundle/translations</argument>
@@ -2351,8 +2347,6 @@
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/MonologBundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/vendor/symfony/debug-bundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/DebugBundle/translations</argument>
-          <argument>/opt/lampp/htdocs/BasketProduct/vendor/doctrine/doctrine-fixtures-bundle/translations</argument>
-          <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/DoctrineFixturesBundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/vendor/symfony/webpack-encore-bundle/src/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/WebpackEncoreBundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/KnpPaginatorBundle/translations</argument>
@@ -2369,8 +2363,6 @@
             <argument>src/Resources/FrameworkBundle/translations</argument>
             <argument>vendor/symfony/twig-bundle/translations</argument>
             <argument>src/Resources/TwigBundle/translations</argument>
-            <argument>vendor/twig/extra-bundle/src/translations</argument>
-            <argument>src/Resources/TwigExtraBundle/translations</argument>
             <argument>vendor/sensio/framework-extra-bundle/src/translations</argument>
             <argument>src/Resources/SensioFrameworkExtraBundle/translations</argument>
             <argument>vendor/doctrine/doctrine-bundle/translations</argument>
@@ -2385,8 +2377,6 @@
             <argument>src/Resources/MonologBundle/translations</argument>
             <argument>vendor/symfony/debug-bundle/translations</argument>
             <argument>src/Resources/DebugBundle/translations</argument>
-            <argument>vendor/doctrine/doctrine-fixtures-bundle/translations</argument>
-            <argument>src/Resources/DoctrineFixturesBundle/translations</argument>
             <argument>vendor/symfony/webpack-encore-bundle/src/translations</argument>
             <argument>src/Resources/WebpackEncoreBundle/translations</argument>
             <argument>src/Resources/KnpPaginatorBundle/translations</argument>
@@ -2645,9 +2635,6 @@
         <argument type="service" id="data_collector.twig"/>
       </call>
       <call method="add">
-        <argument type="service" id="data_collector.http_client"/>
-      </call>
-      <call method="add">
         <argument type="service" id="data_collector.doctrine"/>
       </call>
       <call method="add">
@@ -2790,13 +2777,6 @@
     <service id="mailer.data_collector" class="Symfony\Component\Mailer\DataCollector\MessageDataCollector">
       <tag name="data_collector" template="@WebProfiler/Collector/mailer.html.twig" id="mailer"/>
       <argument type="service" id="mailer.logger_message_listener"/>
-    </service>
-    <service id="data_collector.http_client" class="Symfony\Component\HttpClient\DataCollector\HttpClientDataCollector">
-      <tag name="data_collector" template="@WebProfiler/Collector/http_client.html.twig" id="http_client" priority="250"/>
-      <call method="registerClient">
-        <argument>http_client</argument>
-        <argument type="service" id=".debug.http_client"/>
-      </call>
     </service>
     <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener" public="false">
       <tag name="kernel.event_subscriber"/>
@@ -3035,6 +3015,14 @@
           <argument>onMessage</argument>
         </argument>
         <argument>-255</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service" id="esi_listener"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>0</argument>
       </call>
       <call method="addListener">
         <argument>kernel.response</argument>
@@ -3368,7 +3356,7 @@
     <service id="router.default" class="Symfony\Bundle\FrameworkBundle\Routing\Router" public="false">
       <tag name="monolog.logger" channel="router"/>
       <tag name="container.service_subscriber" id="routing.loader"/>
-      <argument type="service" id=".service_locator.n0p5GNi.router.default"/>
+      <argument type="service" id=".service_locator.UKXznGz.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
         <argument key="cache_dir">/opt/lampp/htdocs/BasketProduct/var/cache/test</argument>
@@ -3733,18 +3721,6 @@
       <call method="addRuntimeLoader">
         <argument type="service" id="twig.runtime_loader"/>
       </call>
-      <call method="registerUndefinedFilterCallback">
-        <argument type="collection">
-          <argument type="service" id="twig.missing_extension_suggestor"/>
-          <argument>suggestFilter</argument>
-        </argument>
-      </call>
-      <call method="registerUndefinedFunctionCallback">
-        <argument type="collection">
-          <argument type="service" id="twig.missing_extension_suggestor"/>
-          <argument>suggestFunction</argument>
-        </argument>
-      </call>
       <configurator service="twig.configurator.environment" method="configure"/>
     </service>
     <service id="twig.app_variable" class="Symfony\Bridge\Twig\AppVariable" public="false">
@@ -3981,7 +3957,6 @@
     <service id="twig.mime_body_renderer" class="Symfony\Bridge\Twig\Mime\BodyRenderer">
       <argument type="service" id="twig"/>
     </service>
-    <service id="twig.missing_extension_suggestor" class="Twig\Extra\TwigExtraBundle\MissingExtensionSuggestor" public="false"/>
     <service id="sensio_framework_extra.controller.listener" class="Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener">
       <tag name="kernel.event_subscriber"/>
       <tag name="container.hot_path"/>
@@ -4067,6 +4042,7 @@
     <service id="data_collector.doctrine" class="Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector" public="false">
       <tag name="data_collector" template="@Doctrine/Collector/db.html.twig" id="db" priority="250"/>
       <argument type="service" id="doctrine"/>
+      <argument>true</argument>
       <call method="addLogger">
         <argument>default</argument>
         <argument type="service" id="doctrine.dbal.logger.profiling.default"/>
@@ -4391,6 +4367,7 @@
       <argument type="collection"/>
     </service>
     <service id="doctrine.orm.default_entity_manager" class="Doctrine\ORM\EntityManager" public="true" lazy="true">
+      <tag name="container.preload" class="Doctrine\ORM\Proxy\Autoloader"/>
       <argument type="service" id="doctrine.dbal.default_connection"/>
       <argument type="service" id="doctrine.orm.default_configuration"/>
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
@@ -5256,29 +5233,6 @@
         <argument>server:log</argument>
       </call>
     </service>
-    <service id="doctrine.fixtures_load_command" class="Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand">
-      <tag name="console.command" command="doctrine:fixtures:load"/>
-      <argument type="service" id="doctrine.fixtures.loader"/>
-      <argument type="service" id="doctrine"/>
-      <call method="setName">
-        <argument>doctrine:fixtures:load</argument>
-      </call>
-    </service>
-    <service id="doctrine.fixtures.loader" class="Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader" public="false">
-      <argument type="service" id="service_container"/>
-      <call method="addFixtures">
-        <argument type="collection">
-          <argument type="collection">
-            <argument key="fixture" type="service" id="App\DataFixtures\AppFixtures"/>
-            <argument key="groups" type="collection"/>
-          </argument>
-          <argument type="collection">
-            <argument key="fixture" type="service" id="App\DataFixtures\ProductFixture"/>
-            <argument key="groups" type="collection"/>
-          </argument>
-        </argument>
-      </call>
-    </service>
     <service id=".1_ServiceLocator~xD2PeBF" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5387,10 +5341,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TestController" class="App\Controller\TestController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TestController" class="App\Controller\TestController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\TestController" class="App\Controller\TestController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ProductRepository" class="App\Repository\ProductRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ProductRepository" class="App\Repository\ProductRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.CmORmuK" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -5426,13 +5379,15 @@
         <argument key="product" type="service" id=".errored..service_locator.JW5D6Lx.App\Entity\Product"/>
       </argument>
     </service>
-    <service id=".service_locator.BanRksc" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.CHzA9bY" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ProductController::index" type="service" id=".service_locator.n8gOTNr"/>
         <argument key="App\Controller\ProductController::show" type="service" id=".service_locator.JW5D6Lx"/>
+        <argument key="App\Controller\TestController::index" type="service" id=".service_locator.n8gOTNr"/>
         <argument key="App\Controller\ProductController:index" type="service" id=".service_locator.n8gOTNr"/>
         <argument key="App\Controller\ProductController:show" type="service" id=".service_locator.JW5D6Lx"/>
+        <argument key="App\Controller\TestController:index" type="service" id=".service_locator.n8gOTNr"/>
       </argument>
     </service>
     <service id=".service_locator.Y7gDuDN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -5448,9 +5403,10 @@
         <argument key="validator.expression" type="service" id="validator.expression"/>
       </argument>
     </service>
-    <service id=".service_locator._cmka45" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.0nodIsM" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="esi" type="service" id="fragment.renderer.esi"/>
         <argument key="inline" type="service" id="fragment.renderer.inline"/>
       </argument>
     </service>
@@ -5503,11 +5459,6 @@
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service" id="form.type.form"/>
       </argument>
     </service>
-    <service id=".debug.http_client" class="Symfony\Component\HttpClient\TraceableHttpClient">
-      <tag name="monolog.logger" channel="http_client"/>
-      <tag name="http_client.client"/>
-      <argument type="service" id=".debug.http_client.inner"/>
-    </service>
     <service id=".service_locator.bpvU51K" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5557,16 +5508,6 @@
     </service>
     <service id="monolog.logger.cache" class="Symfony\Bridge\Monolog\Logger">
       <argument>cache</argument>
-      <call method="pushProcessor">
-        <argument type="service" id="debug.log_processor"/>
-      </call>
-      <call method="pushHandler">
-        <argument type="service" id="monolog.handler.main"/>
-      </call>
-      <configurator class="Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\AddDebugLogProcessorPass" method="configureLogger"/>
-    </service>
-    <service id="monolog.logger.http_client" class="Symfony\Bridge\Monolog\Logger">
-      <argument>http_client</argument>
       <call method="pushProcessor">
         <argument type="service" id="debug.log_processor"/>
       </call>
@@ -5701,6 +5642,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.vdmMuyE" method="withContext"/>
     </service>
+    <service id=".service_locator.vdmMuyE.App\Controller\TestController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\TestController"/>
+      <argument>App\Controller\TestController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.vdmMuyE" method="withContext"/>
+    </service>
     <service id=".service_locator.XSes1R5" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5713,17 +5660,17 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.XSes1R5" method="withContext"/>
     </service>
-    <service id=".service_locator.n0p5GNi" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.UKXznGz" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="routing.loader" type="service" id="routing.loader"/>
       </argument>
     </service>
-    <service id=".service_locator.n0p5GNi.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.UKXznGz.router.default" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="router.default"/>
       <argument>router.default</argument>
       <argument type="service" id="service_container"/>
-      <factory service=".service_locator.n0p5GNi" method="withContext"/>
+      <factory service=".service_locator.UKXznGz" method="withContext"/>
     </service>
     <service id=".service_locator.m90YCjy" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -5850,24 +5797,16 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.BanRksc"/>
+      <argument type="service" id=".service_locator.CHzA9bY"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.BanRksc"/>
-    </service>
-    <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
-      <argument type="collection"/>
-      <argument>6</argument>
-      <call method="setLogger">
-        <argument type="service" id="monolog.logger.http_client" on-invalid="ignore"/>
-      </call>
-      <factory class="Symfony\Component\HttpClient\HttpClient" method="create"/>
+      <argument type="service" id=".service_locator.CHzA9bY"/>
     </service>
     <service id=".errored..service_locator.JW5D6Lx.App\Entity\Product" class="App\Entity\Product"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
-      <argument type="service" id=".service_locator.JO8xsvU"/>
+      <argument type="service" id=".service_locator.l.lS_Wi"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -5930,10 +5869,9 @@
         <argument key="security:encode-password">security.command.user_password_encoder</argument>
         <argument key="server:dump">var_dumper.command.server_dump</argument>
         <argument key="server:log">monolog.command.server_log</argument>
-        <argument key="doctrine:fixtures:load">doctrine.fixtures_load_command</argument>
       </argument>
     </service>
-    <service id=".service_locator.JO8xsvU" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.l.lS_Wi" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service" id="console.command.about"/>
@@ -5973,7 +5911,6 @@
         <argument key="doctrine.database_drop_command" type="service" id="doctrine.database_drop_command"/>
         <argument key="doctrine.database_import_command" type="service" id="doctrine.database_import_command"/>
         <argument key="doctrine.ensure_production_settings_command" type="service" id="doctrine.ensure_production_settings_command"/>
-        <argument key="doctrine.fixtures_load_command" type="service" id="doctrine.fixtures_load_command"/>
         <argument key="doctrine.mapping_convert_command" type="service" id="doctrine.mapping_convert_command"/>
         <argument key="doctrine.mapping_import_command" type="service" id="doctrine.mapping_import_command"/>
         <argument key="doctrine.mapping_info_command" type="service" id="doctrine.mapping_info_command"/>
@@ -6124,7 +6061,6 @@
     <service id="form.property_accessor" alias="property_accessor" public="false"/>
     <service id="form.choice_list_factory" alias="form.choice_list_factory.cached" public="false"/>
     <service id="Symfony\Component\Asset\Packages" alias="assets.packages" public="false"/>
-    <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias=".debug.http_client"/>
     <service id="mailer" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\Transport\TransportInterface" alias="mailer.default_transport"/>
@@ -6206,12 +6142,11 @@
     <service id="Knp\Component\Pager\PaginatorInterface" alias="knp_paginator"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.CmORmuK" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.BanRksc"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.CHzA9bY"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>
     <service id="Psr\Log\LoggerInterface $cacheLogger" alias="monolog.logger.cache"/>
-    <service id="Psr\Log\LoggerInterface $httpClientLogger" alias="monolog.logger.http_client"/>
     <service id="Psr\Log\LoggerInterface $translationLogger" alias="monolog.logger.translation"/>
     <service id="Psr\Log\LoggerInterface $profilerLogger" alias="monolog.logger.profiler"/>
     <service id="Psr\Log\LoggerInterface $phpLogger" alias="monolog.logger.php"/>
@@ -6238,6 +6173,5 @@
     <service id="argument_resolver.default" alias="debug.argument_resolver.default" public="false"/>
     <service id="argument_resolver.variadic" alias="debug.argument_resolver.variadic" public="false"/>
     <service id="argument_resolver.not_tagged_controller" alias="debug.argument_resolver.not_tagged_controller" public="false"/>
-    <service id="http_client" alias=".debug.http_client"/>
   </services>
 </container>

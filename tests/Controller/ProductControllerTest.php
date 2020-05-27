@@ -15,20 +15,21 @@ class ProductControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/product');
-        $this->assertSame(500, $client->getResponse()->getStatusCode());
+        //$this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('html:contains("product")')->count());
 
     }
 
 
 
     /** @test3 */
-    public function testHomepageIsUp()
+   /* public function testHomepageIsUp()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/product');
-
-        $this->assertSame(1, $crawler->filter('html:contains("a.produits")')->count());
-    }
+        $this->assertEquals(1, $crawler->filter('html:contains("cdfv")')->count());
+        $this->assertContains("j product 1",$client->getResponse()->getContent());
+    }*/
 
 }
 

@@ -10,7 +10,9 @@ return [
     [ // $staticRoutes
         '/basket' => [[['_route' => 'basket', '_controller' => 'App\\Controller\\BasketController::show'], null, null, null, false, false, null]],
         '/clear' => [[['_route' => 'basket.clear', '_controller' => 'App\\Controller\\BasketController::clear'], null, null, null, false, false, null]],
-        '/product' => [[['_route' => 'product.index', '_controller' => 'App\\Controller\\ProductController::index'], null, null, null, false, false, null]],
+        '/nbarticle' => [[['_route' => 'basket.nbarticle', '_controller' => 'App\\Controller\\BasketController::nbarticle'], null, null, null, false, false, null]],
+        '/' => [[['_route' => 'product.index', '_controller' => 'App\\Controller\\ProductController::index'], null, null, null, false, false, null]],
+        '/test' => [[['_route' => 'test', '_controller' => 'App\\Controller\\TestController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

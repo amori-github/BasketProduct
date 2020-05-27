@@ -100,33 +100,32 @@ class __TwigTemplate_3e553fc92403e80ddbf4484fabc398758ea6d41fe4e830df73d3a8b589b
             echo "                <div class=\"col-3\">
                     <div class=\"car text-center\" >
                         <div style=\"border-style: groove;background-color: white\" >
-                            <img  class=\"image-style\" src=\"";
+                            <img  class=\"image-style\" src=\"#\" height=\"200\" alt=\"";
             // line 16
-            echo twig_escape_filter($this->env, ($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/") . twig_get_attribute($this->env, $this->source, $context["product"], "nom", [], "any", false, false, false, 16)), "html", null, true);
-            echo ".jpg\" height=\"200\" alt=\"";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "nom", [], "any", false, false, false, 16), "html", null, true);
             echo "\" />
+
                             <div class=\"card-body\" style=\"background-color: #F5F5F5\">
                                 <h5 class=\"card-title\">
                                     <a id=\"produits\" href=\"#\">";
-            // line 19
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "nom", [], "any", false, false, false, 19), "html", null, true);
+            // line 20
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "nom", [], "any", false, false, false, 20), "html", null, true);
             echo "</a>
                                 </h5>
                                 <p class=\"card-text\">
                                     ";
-            // line 22
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "description", [], "any", false, false, false, 22), "html", null, true);
+            // line 23
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "description", [], "any", false, false, false, 23), "html", null, true);
             echo "
                                 </p>
-                                <div class=\"text-danger\" style=\"font-size: 2em\">";
-            // line 24
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "prix", [], "any", false, false, false, 24), "html", null, true);
+                                <div class=\"text-danger\" >";
+            // line 25
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "prix", [], "any", false, false, false, 25), "html", null, true);
             echo " €</div>
                                 <p class=\"card-text\">
                                     <a class=\"btn btn-primary\" role=\"button\"  href=\"";
-            // line 26
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.show", ["id" => twig_get_attribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 26)]), "html", null, true);
+            // line 27
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.show", ["id" => twig_get_attribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 27)]), "html", null, true);
             echo "\">Details...</a>
                                 </p>
                             </div>
@@ -138,11 +137,11 @@ class __TwigTemplate_3e553fc92403e80ddbf4484fabc398758ea6d41fe4e830df73d3a8b589b
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['product'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 33
+        // line 34
         echo "            <div class=\"navigation navigator-center\">
                 ";
-        // line 34
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 34, $this->source); })()));
+        // line 35
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 35, $this->source); })()));
         echo "
             </div>
 
@@ -169,7 +168,7 @@ class __TwigTemplate_3e553fc92403e80ddbf4484fabc398758ea6d41fe4e830df73d3a8b589b
 
     public function getDebugInfo()
     {
-        return array (  145 => 34,  142 => 33,  129 => 26,  124 => 24,  119 => 22,  113 => 19,  105 => 16,  100 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  144 => 35,  141 => 34,  128 => 27,  123 => 25,  118 => 23,  112 => 20,  105 => 16,  100 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -189,7 +188,8 @@ class __TwigTemplate_3e553fc92403e80ddbf4484fabc398758ea6d41fe4e830df73d3a8b589b
                 <div class=\"col-3\">
                     <div class=\"car text-center\" >
                         <div style=\"border-style: groove;background-color: white\" >
-                            <img  class=\"image-style\" src=\"{{ asset(\"images/\") ~ product.nom }}.jpg\" height=\"200\" alt=\"{{ product.nom }}\" />
+                            <img  class=\"image-style\" src=\"#\" height=\"200\" alt=\"{{ product.nom }}\" />
+
                             <div class=\"card-body\" style=\"background-color: #F5F5F5\">
                                 <h5 class=\"card-title\">
                                     <a id=\"produits\" href=\"#\">{{ product.nom }}</a>
@@ -197,7 +197,7 @@ class __TwigTemplate_3e553fc92403e80ddbf4484fabc398758ea6d41fe4e830df73d3a8b589b
                                 <p class=\"card-text\">
                                     {{ product.description}}
                                 </p>
-                                <div class=\"text-danger\" style=\"font-size: 2em\">{{ product.prix }} €</div>
+                                <div class=\"text-danger\" >{{ product.prix }} €</div>
                                 <p class=\"card-text\">
                                     <a class=\"btn btn-primary\" role=\"button\"  href=\"{{ path('product.show', {id: product.id}) }}\">Details...</a>
                                 </p>
