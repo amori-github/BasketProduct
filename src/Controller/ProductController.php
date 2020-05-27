@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Basket;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -23,15 +24,20 @@ class ProductController extends AbstractController
      * @var ObjectManager
      */
     private $em;
+    private $basket;
+
 
     public function __construct(ProductRepository $repository, EntityManagerInterface $em)
     {
         $this->repository = $repository;
         $this->em = $em;
-    }
+
+  }
+
+
 
     /**
-     * @Route("/product", name="product.index")
+     * @Route("/", name="product.index")
      * @param PaginatorInterface $paginator
      * @param Request $request
      * @return Response
@@ -44,9 +50,10 @@ class ProductController extends AbstractController
             4
         );
 
+
         return $this->render('product/index.html.twig',[
             "Current_menu" => "products",
-            "products" => $product,
+            "products" => $product
         ]);
 
     }
@@ -63,8 +70,6 @@ class ProductController extends AbstractController
             "product" => $product,
             "Current_menu" => "products"
         ]);
-
-
 
     }
 

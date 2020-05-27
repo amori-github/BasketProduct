@@ -19,7 +19,7 @@ use Symfony\Component\CssSelector\CssSelectorConverter;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Crawler implements \Countable, \IteratorAggregate
+class Crawler extends \DOMDocument implements \Countable, \IteratorAggregate
 {
     protected $uri;
 

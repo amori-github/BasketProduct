@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+<ul id="id-1">
+    {% for product in products %}
+        <li>{{ product.nom }}</li>
+    {% endfor %}
+
+</ul>
+
+        <span id="article-100" class="article">Article 1</span>
+        <span id="article-101" class="article">Article 2</span>
+        <span id="article-102" class="article">Article 3</span>
+        <span id="article-103" class="article">Article 3</span>
+
+{% endblock %}

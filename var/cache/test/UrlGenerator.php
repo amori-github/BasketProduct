@@ -7,6 +7,8 @@ return [
     'basket.add' => [['id'], ['_controller' => 'App\\Controller\\BasketController::add'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/add']], [], []],
     'basket.remove' => [['id'], ['_controller' => 'App\\Controller\\BasketController::remove'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/remove']], [], []],
     'basket.clear' => [[], ['_controller' => 'App\\Controller\\BasketController::clear'], [], [['text', '/clear']], [], []],
-    'product.index' => [[], ['_controller' => 'App\\Controller\\ProductController::index'], [], [['text', '/product']], [], []],
+    'basket.nbarticle' => [[], ['_controller' => 'App\\Controller\\BasketController::nbarticle'], [], [['text', '/nbarticle']], [], []],
+    'product.index' => [[], ['_controller' => 'App\\Controller\\ProductController::index'], [], [['text', '/']], [], []],
     'product.show' => [['id'], ['_controller' => 'App\\Controller\\ProductController::show'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/product/show']], [], []],
+    'test' => [[], ['_controller' => 'App\\Controller\\TestController::index'], [], [['text', '/test']], [], []],
 ];

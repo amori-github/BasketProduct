@@ -13,7 +13,8 @@
                 <div class="col-3">
                     <div class="car text-center" >
                         <div style="border-style: groove;background-color: white" >
-                            <img  class="image-style" src="{{ asset("images/") ~ product.nom }}.jpg" height="200" alt="{{ product.nom }}" />
+                            <img  class="image-style" src="#" height="200" alt="{{ product.nom }}" />
+
                             <div class="card-body" style="background-color: #F5F5F5">
                                 <h5 class="card-title">
                                     <a id="produits" href="#">{{ product.nom }}</a>
@@ -21,7 +22,7 @@
                                 <p class="card-text">
                                     {{ product.description}}
                                 </p>
-                                <div class="text-danger" style="font-size: 2em">{{ product.prix }} €</div>
+                                <div class="text-danger" >{{ product.prix }} €</div>
                                 <p class="card-text">
                                     <a class="btn btn-primary" role="button"  href="{{ path('product.show', {id: product.id}) }}">Details...</a>
                                 </p>

@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -19,6 +20,7 @@ class BasketController extends AbstractController
     public function __construct(EntityManagerInterface $objectManager)
     {
         $this->basket = new Basket($objectManager);
+
     }
 
     /**
@@ -33,10 +35,13 @@ class BasketController extends AbstractController
             $products = $this->basket->getProducts();
             $totalPrice = $this->basket->totalPrice($products);
         }
+        $nbarticles = $this->basket->nbarticle();
+
 
         return $this->render('basket/index.html.twig', [
             'products' => $products,
             'totalPrice' => $totalPrice,
+            "articles" => $nbarticles
         ]);
     }
 
@@ -47,7 +52,7 @@ class BasketController extends AbstractController
      * @param Request $request
      * @return RedirectResponse
      */
-    public function add($id,Request $request)
+    public function add($id, Request $request)
     {
         $product = $this->getDoctrine()
             ->getRepository(Product::class)
@@ -55,14 +60,15 @@ class BasketController extends AbstractController
 
         if ($product->getId()) {
             $this->basket->add($product);
-            $this->addFlash('success', 'Le produit est ajouté avec succès !');
         }
 
-        if ($request->query->get('qte') != null){
+        if ($request->query->get('qte') != null) {
             $qte = $request->query->get('qte');
-            $this->basket->update($product ,$qte );
+            $this->basket->update($product, $qte);
         }
 
+
+        $this->addFlash('success', 'Le produit est ajouté avec succès !');
         return $this->redirectToRoute('basket', [
             'id' => $product->getId(),
         ]);
@@ -77,27 +83,30 @@ class BasketController extends AbstractController
             ->getRepository(Product::class)
             ->find($id);
 
-       $this->basket->remove($product);
+        $this->basket->remove($product);
 
         return $this->redirectToRoute('basket');
     }
+
     /**
      * @Route("/clear", name="basket.clear")
      */
     public function clear()
     {
-       $this->basket->clear();
-       return $this->redirectToRoute('basket');
+        $this->basket->clear();
+        return $this->redirectToRoute('basket');
     }
 
+    /**
+     * @Route("/nbarticle", name="basket.nbarticle")
+     */
     public function nbarticle()
     {
         $nbarticles = $this->basket->nbarticle();
         return $this->render('basket/nbarticle.html.twig',[
             "articles" => $nbarticles
-        ]);
+        ]) ;
     }
-
 
 
 }
