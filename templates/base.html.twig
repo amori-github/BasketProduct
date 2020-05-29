@@ -11,6 +11,7 @@
 <body>
 <header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
     <a class="navbar-brand" href="#">ChoosIt</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,8 +29,9 @@
 
 
     </div>
+    {{ render(controller('App\\Controller\\BasketController::nbarticle')) }}
     {#assurez-vous d'activer esi dans la config/packages/framework.yaml#}
-    {{ render_esi(url('basket.nbarticle')) }}
+    {#{{ render_esi(url('basket.nbarticle')) }}#}
     {#<a class="basket-link mx-2" href="{{ path('basket') }}">
         <i class="fas fa-shopping-cart"></i>
         <div class="basket-count d-flex justify-content-center align-items-center">

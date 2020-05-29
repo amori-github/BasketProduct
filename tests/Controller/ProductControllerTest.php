@@ -1,35 +1,24 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\Tests;
 
-
-use Symfony\Component\HttpFoundation\Response;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ProductControllerTest extends WebTestCase
 {
-
-
-    /** @test */
-   public function Index()
+    /**
+     * @runInSeparateProcess
+     */
+    public function testProduct()
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/product');
-        //$this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertSame(1, $crawler->filter('html:contains("product")')->count());
-
+        $client= static::createClient();
+        $crawler = $client->request('GET', '/');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $tab1 =  $crawler->evaluate('count(//a[@id="produits"])');
+        $ar1=[
+            0 => 4.0,
+        ];
+        $this->assertSame($ar1,  $tab1 );
     }
-
-
-
-    /** @test3 */
-   /* public function testHomepageIsUp()
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/product');
-        $this->assertEquals(1, $crawler->filter('html:contains("cdfv")')->count());
-        $this->assertContains("j product 1",$client->getResponse()->getContent());
-    }*/
-
 }
-

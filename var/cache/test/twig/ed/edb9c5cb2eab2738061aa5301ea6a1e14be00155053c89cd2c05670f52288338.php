@@ -60,6 +60,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 <body>
 <header>
 <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">
+
     <a class=\"navbar-brand\" href=\"#\">ChoosIt</a>
     <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\"
             aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
@@ -70,13 +71,13 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
         <ul class=\"navbar-nav mr-auto\">
             <li class=\"nav-item\">
                 <a class=\"nav-link ";
-        // line 23
-        if (((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context)) && 0 === twig_compare((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context) ? $context["Current_menu"] : (function () { throw new RuntimeError('Variable "Current_menu" does not exist.', 23, $this->source); })()), "products"))) {
+        // line 24
+        if (((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context)) && 0 === twig_compare((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context) ? $context["Current_menu"] : (function () { throw new RuntimeError('Variable "Current_menu" does not exist.', 24, $this->source); })()), "products"))) {
             echo "active";
         }
         echo "\"
                    href=\"";
-        // line 24
+        // line 25
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.index");
         echo "\">Catalogue</a>
             </li>
@@ -87,11 +88,14 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
     </div>
     ";
         // line 32
-        echo "    ";
-        echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragmentStrategy("esi", $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("basket.nbarticle"));
+        echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragment(Symfony\Bridge\Twig\Extension\HttpKernelExtension::controller("App\\Controller\\BasketController::nbarticle"));
         echo "
     ";
-        // line 41
+        // line 34
+        echo "    ";
+        // line 35
+        echo "    ";
+        // line 43
         echo "
 
 
@@ -99,11 +103,11 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 </nav>
 </header>
 ";
-        // line 47
+        // line 49
         $this->displayBlock('body', $context, $blocks);
-        // line 48
+        // line 50
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 52
+        // line 54
         echo "</body>
 </html>
 ";
@@ -158,7 +162,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
     }
 
-    // line 47
+    // line 49
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -176,7 +180,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
     }
 
-    // line 48
+    // line 50
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -186,7 +190,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 49
+        // line 51
         echo "    ";
         echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("app");
         echo "
@@ -212,7 +216,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
     public function getDebugInfo()
     {
-        return array (  190 => 49,  180 => 48,  162 => 47,  148 => 7,  138 => 6,  119 => 5,  107 => 52,  105 => 48,  103 => 47,  95 => 41,  90 => 32,  80 => 24,  74 => 23,  59 => 10,  57 => 6,  53 => 5,  47 => 1,);
+        return array (  194 => 51,  184 => 50,  166 => 49,  152 => 7,  142 => 6,  123 => 5,  111 => 54,  109 => 50,  107 => 49,  99 => 43,  97 => 35,  95 => 34,  91 => 32,  81 => 25,  75 => 24,  59 => 10,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -230,6 +234,7 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 <body>
 <header>
 <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">
+
     <a class=\"navbar-brand\" href=\"#\">ChoosIt</a>
     <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\"
             aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
@@ -247,8 +252,9 @@ class __TwigTemplate_304de0cc42ddfa853c206e72ced09797dd7abcef043d70ebf31f611a46e
 
 
     </div>
+    {{ render(controller('App\\\\Controller\\\\BasketController::nbarticle')) }}
     {#assurez-vous d'activer esi dans la config/packages/framework.yaml#}
-    {{ render_esi(url('basket.nbarticle')) }}
+    {#{{ render_esi(url('basket.nbarticle')) }}#}
     {#<a class=\"basket-link mx-2\" href=\"{{ path('basket') }}\">
         <i class=\"fas fa-shopping-cart\"></i>
         <div class=\"basket-count d-flex justify-content-center align-items-center\">
