@@ -34,8 +34,6 @@ class ProductController extends AbstractController
 
   }
 
-
-
     /**
      * @Route("/", name="product.index")
      * @param PaginatorInterface $paginator

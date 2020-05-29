@@ -104,6 +104,10 @@ class __TwigTemplate_5f9fdd3f71ce4951352fe913e718b7631e6bf6f96e1cee020cf0ff3ecb8
         echo "
 </ul>
 
+        <a id=\"produits\" href=\"#\"> a</a>
+        <a id=\"produits\" href=\"#\"> b</a>
+        <a id=\"produits\" href=\"#\"> c</a>
+
         <span id=\"article-100\" class=\"article\">Article 1</span>
         <span id=\"article-101\" class=\"article\">Article 2</span>
         <span id=\"article-102\" class=\"article\">Article 3</span>
@@ -146,6 +150,10 @@ class __TwigTemplate_5f9fdd3f71ce4951352fe913e718b7631e6bf6f96e1cee020cf0ff3ecb8
     {% endfor %}
 
 </ul>
+
+        <a id=\"produits\" href=\"#\"> a</a>
+        <a id=\"produits\" href=\"#\"> b</a>
+        <a id=\"produits\" href=\"#\"> c</a>
 
         <span id=\"article-100\" class=\"article\">Article 1</span>
         <span id=\"article-101\" class=\"article\">Article 2</span>
