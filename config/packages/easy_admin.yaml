@@ -1,0 +1,13 @@
+easy_admin:
+  user:
+    display_name: true
+    display_avatar: true
+    name_property_path: 'fullName'
+  entities:
+    # change the following to the namespaces of your own entities
+    - App\Entity\User
+    - App\Entity\Product
+
+  design:
+    brand_color: 'rgba(26, 188, 156, 0.85)'
+

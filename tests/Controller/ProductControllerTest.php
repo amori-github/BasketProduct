@@ -15,10 +15,10 @@ class ProductControllerTest extends WebTestCase
         $client= static::createClient();
         $crawler = $client->request('GET', '/');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $tab1 =  $crawler->evaluate('count(//a[@id="produits"])');
-        $ar1=[
+        $nbItems =  $crawler->evaluate('count(//a[@id="produits"])');
+        $nbItemsPage=[
             0 => 4.0,
         ];
-        $this->assertSame($ar1,  $tab1 );
+        $this->assertSame($nbItemsPage,  $nbItems );
     }
 }
