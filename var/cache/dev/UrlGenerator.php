@@ -22,5 +22,8 @@ return [
     'basket.nbarticle' => [[], ['_controller' => 'App\\Controller\\BasketController::nbarticle'], [], [['text', '/nbarticle']], [], []],
     'product.index' => [[], ['_controller' => 'App\\Controller\\ProductController::index'], [], [['text', '/']], [], []],
     'product.show' => [['id'], ['_controller' => 'App\\Controller\\ProductController::show'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/product/show']], [], []],
+    'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], []],
+    'app_logout' => [[], ['_controller' => 'App\\Controller\\SecurityController::logout'], [], [['text', '/logout']], [], []],
     'test' => [[], ['_controller' => 'App\\Controller\\TestController::index'], [], [['text', '/test']], [], []],
+    'easyadmin' => [[], ['_controller' => 'EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\EasyAdminController::indexAction'], [], [['text', '/admin/']], [], []],
 ];
