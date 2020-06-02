@@ -20,7 +20,7 @@ class UserFixtures extends Fixture
     {
         $user = new User();
         // ...
-        $roles[]= 'ROLE_USER';
+        $roles[]= 'ROLE_ADMIN';
         $user->setEmail('admin@gmail.com');
         $user->setRoles($roles);
         $user->setPassword($this->passwordEncoder->encodePassword(
@@ -28,7 +28,18 @@ class UserFixtures extends Fixture
                        'adminadmin'
                  ));
 
+        $user2 = new User();
+        // ...
+        $roles2[]= 'ROLE_USER';
+        $user2->setEmail('user@gmail.com');
+        $user2->setRoles($roles2);
+        $user2->setPassword($this->passwordEncoder->encodePassword(
+            $user2,
+            'useruser'
+        ));
+
         $manager->persist($user);
+        $manager->persist($user2);
         $manager->flush();
     }
 }

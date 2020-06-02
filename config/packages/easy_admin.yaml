@@ -1,13 +1,37 @@
 easy_admin:
-  user:
-    display_name: true
-    display_avatar: true
-    name_property_path: 'fullName'
-  entities:
-    # change the following to the namespaces of your own entities
-    - App\Entity\User
-    - App\Entity\Product
+    user:
+        display_name: true
+        display_avatar: true
+        name_property_path: 'fullName'
+    entities:
+        User:
+            class: App\Entity\User
 
-  design:
-    brand_color: 'rgba(26, 188, 156, 0.85)'
+        Product:
+            class: App\Entity\Product
+            list:
+                fields:
+                    - { property: 'nom', label: 'Name', icon: 'user' }
+                    - { property: 'prix', label: 'Price' }
+                    - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'updatedAt', label: 'DateTime' }
+
+            show:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
+            form:
+                fields:
+                    - { property: 'nom', label: 'Name' }
+                    - { property: 'prix', label: 'Price' }
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'updatedAt', label: 'DateTime' }
+
+    # change the following to the namespaces of your own entities
+    #- App\Entity\User
+    #- App\Entity\Product
+
+    design:
+        brand_color: 'rgba(26, 188, 156, 0.85)'
 
