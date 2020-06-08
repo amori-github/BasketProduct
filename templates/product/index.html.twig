@@ -7,6 +7,12 @@
 
     <div class="container mt-4">
         <h3>Catalogue de Produits</h3>
+        <p class="card-text">
+            <a class="btn btn-primary" role="button"  href="{{ path('product.export.json') }}">Exporter Les produit json</a>
+        </p>
+        <p class="card-text">
+            <a class="btn btn-primary" role="button"  href="{{ path('product.export.csv') }}">Exporter Les produit CSV</a>
+        </p>
 
         <div class="row flex">
             {% for product in products %}
@@ -27,7 +33,7 @@
                                 </p>
                                 <div class="text-danger" >{{ product.prix }} €</div>
                                 <p class="card-text">
-                                    <a class="btn btn-primary" role="button"  href="{{ path('product.show', {id: product.id}) }}">Details...</a>
+                                    <a class="btn btn-primary" role="button"  href="{{ path('product.show', {slug: product.slug , id: product.id }) }}">Details...</a>
                                 </p>
                             </div>
                         </div>

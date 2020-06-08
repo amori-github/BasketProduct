@@ -3,11 +3,10 @@
 {% block title product.nom  %}
 
 {% block body %}
+
     <div class="container mt-3" style="border-style: groove;background-color: white">
         <div class="row justify-content-between">
-            {#<div class="col-md-2">
-                <img  class="image-style" src="#" height="200" alt="{{ product.nom }}" />
-            </div>#}
+
             <div id="easyadmin-lightbox-{{ product.id }}" class="easyadmin-lightbox">
                 {# the second parameter is the name of the property with the UploadableField annotation #}
                 <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="image-style"  height="200" alt="{{ product.nom }}">
@@ -39,6 +38,10 @@
         </div>
 
     </div>
+
+
+
+
 
 {% endblock %}
 

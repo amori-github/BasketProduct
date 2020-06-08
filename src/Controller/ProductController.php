@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Basket;
+
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class ProductController extends AbstractController
 {
@@ -24,7 +25,7 @@ class ProductController extends AbstractController
      * @var ObjectManager
      */
     private $em;
-    private $basket;
+
 
 
     public function __construct(ProductRepository $repository, EntityManagerInterface $em)
@@ -57,19 +58,64 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/show/{id}", name="product.show")
+     *
+     * @Route("/product/{slug}-{id}", name="product.show", requirements={"slug": "[a-z0-9\-]*"})
      * @param Product $product
      * @return Response
      */
     public function show(Product $product):Response
     {
+             return $this->render('product/show.html.twig',[
+                 "product" => $product
 
-        return $this->render('product/show.html.twig',[
-            "product" => $product,
-            "Current_menu" => "products"
-        ]);
+             ]);
+    }
+
+    /**
+     * @Route("/product/exportjson", name="product.export.json", methods={"get"})
+     * @return Response
+     */
+    public function exportjson():Response
+    {
+
+        $content = $this->json($this->repository->findAll(),200,[],['groups'=>'product:read']);
+        $response = new Response($content);
+        $response->headers->set('Content-Type', 'text/json');
+        $response->headers->set('Content-Disposition', 'attachment; filename="produits.json"');
+        return $response;
 
     }
+
+    /**
+     * @Route("/product/exportcsv", name="product.export.csv", methods={"get"})
+     *
+     */
+    public function ExportCsv()
+    {
+
+       // $data = $this->json($this->repository->findAll(),200,[],['groups'=>'product:read']);
+        $events  = $this->repository->findAll();
+        foreach ($events as $event) {
+            $data = array($event->getId(), $event->getNom(), $event->getDescription(), $event->getPrix());
+            $rows[] = implode(';', $data);
+        }
+        $handle = fopen('php://output', 'w+');
+        // Add the header of the CSV file
+        fputcsv($handle, array('Id', 'Nom', 'Description', 'Prix'),';');
+        $handle = implode("\n", $rows);
+        $response = new Response($handle);
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="produits.csv"');
+
+        return $response;
+
+    }
+
+
+
+
+
+
 
 
 }

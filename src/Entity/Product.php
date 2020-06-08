@@ -5,12 +5,15 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @Vich\Uploadable
+ *
  */
 class Product
 {
@@ -18,23 +21,33 @@ class Product
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("product:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("product:read")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("product:read")
      */
     private $prix;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("product:read")
      */
     private $description;
+    /**
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\Column(type="string", length=128, unique=true)
+     */
+    private  $slug;
+
 
     private $quantity;
 
@@ -162,5 +175,23 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
+
+
 
 }

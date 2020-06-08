@@ -25,6 +25,7 @@
       <parameter key="EasyAdminBundle">EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle</parameter>
       <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
       <parameter key="VichUploaderBundle">Vich\UploaderBundle\VichUploaderBundle</parameter>
+      <parameter key="StofDoctrineExtensionsBundle">Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -90,6 +91,10 @@
       <parameter key="VichUploaderBundle" type="collection">
         <parameter key="path">/opt/lampp/htdocs/BasketProduct/vendor/vich/uploader-bundle</parameter>
         <parameter key="namespace">Vich\UploaderBundle</parameter>
+      </parameter>
+      <parameter key="StofDoctrineExtensionsBundle" type="collection">
+        <parameter key="path">/opt/lampp/htdocs/BasketProduct/vendor/stof/doctrine-extensions-bundle</parameter>
+        <parameter key="namespace">Stof\DoctrineExtensionsBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -398,6 +403,20 @@
       </parameter>
     </parameter>
     <parameter key="vich_uploader.file_injector.class">Vich\UploaderBundle\Injector\FileInjector</parameter>
+    <parameter key="stof_doctrine_extensions.listener.sluggable.class">Gedmo\Sluggable\SluggableListener</parameter>
+    <parameter key="stof_doctrine_extensions.default_locale">en_US</parameter>
+    <parameter key="stof_doctrine_extensions.translation_fallback">false</parameter>
+    <parameter key="stof_doctrine_extensions.persist_default_translation">false</parameter>
+    <parameter key="stof_doctrine_extensions.skip_translation_on_load">false</parameter>
+    <parameter key="stof_doctrine_extensions.listener.translatable.class">Gedmo\Translatable\TranslatableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.timestampable.class">Gedmo\Timestampable\TimestampableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.blameable.class">Gedmo\Blameable\BlameableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.tree.class">Gedmo\Tree\TreeListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.loggable.class">Gedmo\Loggable\LoggableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.sortable.class">Gedmo\Sortable\SortableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.softdeleteable.class">Gedmo\SoftDeleteable\SoftDeleteableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.uploadable.class">Gedmo\Uploadable\UploadableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.reference_integrity.class">Gedmo\ReferenceIntegrity\ReferenceIntegrityListener</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -480,12 +499,17 @@
         <parameter>@WebProfiler/Collector/config.html.twig</parameter>
       </parameter>
     </parameter>
-    <parameter key="console.command.ids" type="collection"/>
+    <parameter key="console.command.ids" type="collection">
+      <parameter>console.command.public_alias.App\Command\ImportCommand</parameter>
+    </parameter>
   </parameters>
   <services>
     <service id="service_container" class="Symfony\Component\DependencyInjection\ContainerInterface" public="true" synthetic="true"/>
     <service id="kernel" class="App\Kernel" public="true" synthetic="true">
       <tag name="routing.route_loader"/>
+    </service>
+    <service id="App\Command\ImportCommand" class="App\Command\ImportCommand" autowire="true" autoconfigure="true">
+      <tag name="console.command"/>
     </service>
     <service id="App\Controller\BasketController" class="App\Controller\BasketController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
@@ -511,15 +535,6 @@
         <argument type="service" id=".service_locator.vdmMuyE.App\Controller\SecurityController"/>
       </call>
     </service>
-    <service id="App\Controller\TestController" class="App\Controller\TestController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="App\Repository\ProductRepository"/>
-      <argument type="service" id="doctrine.orm.default_entity_manager"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.vdmMuyE.App\Controller\TestController"/>
-      </call>
-    </service>
     <service id="App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
@@ -541,6 +556,7 @@
       <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="security.user_password_encoder.generic"/>
     </service>
+    <service id="App\Services\ConvertCsvToArray" class="App\Services\ConvertCsvToArray" autowire="true" autoconfigure="true"/>
     <service id=".legacy_controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -2040,6 +2056,8 @@
           <argument>/opt/lampp/htdocs/BasketProduct/vendor/doctrine/doctrine-fixtures-bundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/DoctrineFixturesBundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/VichUploaderBundle/translations</argument>
+          <argument>/opt/lampp/htdocs/BasketProduct/vendor/stof/doctrine-extensions-bundle/translations</argument>
+          <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/StofDoctrineExtensionsBundle/translations</argument>
           <argument>/opt/lampp/htdocs/BasketProduct/src/Resources/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
@@ -2080,6 +2098,8 @@
             <argument>vendor/doctrine/doctrine-fixtures-bundle/translations</argument>
             <argument>src/Resources/DoctrineFixturesBundle/translations</argument>
             <argument>src/Resources/VichUploaderBundle/translations</argument>
+            <argument>vendor/stof/doctrine-extensions-bundle/translations</argument>
+            <argument>src/Resources/StofDoctrineExtensionsBundle/translations</argument>
             <argument>src/Resources/translations</argument>
           </argument>
         </argument>
@@ -3896,6 +3916,9 @@
       <call method="addEventSubscriber">
         <argument type="service" id="vich_uploader.listener.upload.product_images"/>
       </call>
+      <call method="addEventSubscriber">
+        <argument type="service" id="stof_doctrine_extensions.listener.sluggable"/>
+      </call>
       <call method="addEventListener">
         <argument type="collection">
           <argument>loadClassMetadata</argument>
@@ -5351,7 +5374,7 @@
       <tag name="console.command" command="server:run"/>
       <argument>/opt/lampp/htdocs/BasketProduct/public</argument>
       <argument>dev</argument>
-      <argument>/opt/lampp/htdocs/BasketProduct/var/cache</argument>
+      <argument>/opt/lampp/htdocs/BasketProduct</argument>
       <call method="setName">
         <argument>server:run</argument>
       </call>
@@ -5360,21 +5383,21 @@
       <tag name="console.command" command="server:start"/>
       <argument>/opt/lampp/htdocs/BasketProduct/public</argument>
       <argument>dev</argument>
-      <argument>/opt/lampp/htdocs/BasketProduct/var/cache</argument>
+      <argument>/opt/lampp/htdocs/BasketProduct</argument>
       <call method="setName">
         <argument>server:start</argument>
       </call>
     </service>
     <service id="web_server.command.server_stop" class="Symfony\Bundle\WebServerBundle\Command\ServerStopCommand" public="false">
       <tag name="console.command" command="server:stop"/>
-      <argument>/opt/lampp/htdocs/BasketProduct/var/cache</argument>
+      <argument>/opt/lampp/htdocs/BasketProduct</argument>
       <call method="setName">
         <argument>server:stop</argument>
       </call>
     </service>
     <service id="web_server.command.server_status" class="Symfony\Bundle\WebServerBundle\Command\ServerStatusCommand" public="false">
       <tag name="console.command" command="server:status"/>
-      <argument>/opt/lampp/htdocs/BasketProduct/var/cache</argument>
+      <argument>/opt/lampp/htdocs/BasketProduct</argument>
       <call method="setName">
         <argument>server:status</argument>
       </call>
@@ -5944,6 +5967,14 @@
       <argument type="service" id="vich_uploader.metadata_reader"/>
       <argument type="service" id="vich_uploader.upload_handler"/>
     </service>
+    <service id="stof_doctrine_extensions.listener.sluggable" class="Gedmo\Sluggable\SluggableListener" public="false">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <call method="setAnnotationReader">
+        <argument type="service" id="annotations.cached_reader"/>
+      </call>
+    </service>
+    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Command\ImportCommand" class="App\Command\ImportCommand" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Command\ImportCommand" class="App\Command\ImportCommand" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\BasketController" class="App\Controller\BasketController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\BasketController" class="App\Controller\BasketController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\BasketController" class="App\Controller\BasketController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -5953,9 +5984,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TestController" class="App\Controller\TestController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TestController" class="App\Controller\TestController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\TestController" class="App\Controller\TestController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" abstract="true"/>
@@ -6211,17 +6239,15 @@
         <argument key="authenticationUtils" type="service" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.W70EH2a" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.tJh0hLe" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ProductController::index" type="service" id=".service_locator.n8gOTNr"/>
         <argument key="App\Controller\ProductController::show" type="service" id=".service_locator.JW5D6Lx"/>
         <argument key="App\Controller\SecurityController::login" type="service" id=".service_locator.g.xob4v"/>
-        <argument key="App\Controller\TestController::index" type="service" id=".service_locator.n8gOTNr"/>
         <argument key="App\Controller\ProductController:index" type="service" id=".service_locator.n8gOTNr"/>
         <argument key="App\Controller\ProductController:show" type="service" id=".service_locator.JW5D6Lx"/>
         <argument key="App\Controller\SecurityController:login" type="service" id=".service_locator.g.xob4v"/>
-        <argument key="App\Controller\TestController:index" type="service" id=".service_locator.n8gOTNr"/>
       </argument>
     </service>
     <service id=".service_locator.Y7gDuDN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -6518,12 +6544,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.vdmMuyE" method="withContext"/>
     </service>
-    <service id=".service_locator.vdmMuyE.App\Controller\TestController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
-      <tag name="container.service_locator_context" id="App\Controller\TestController"/>
-      <argument>App\Controller\TestController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.vdmMuyE" method="withContext"/>
-    </service>
     <service id=".service_locator.XSes1R5" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6698,12 +6718,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.W70EH2a"/>
+      <argument type="service" id=".service_locator.tJh0hLe"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.W70EH2a"/>
+      <argument type="service" id=".service_locator.tJh0hLe"/>
     </service>
     <service id=".errored..service_locator.JW5D6Lx.App\Entity\Product" class="App\Entity\Product"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
@@ -7137,7 +7157,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image" public="false"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.CmORmuK" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.W70EH2a"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.tJh0hLe"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>
@@ -7169,5 +7189,6 @@
     <service id="argument_resolver.default" alias="debug.argument_resolver.default" public="false"/>
     <service id="argument_resolver.variadic" alias="debug.argument_resolver.variadic" public="false"/>
     <service id="argument_resolver.not_tagged_controller" alias="debug.argument_resolver.not_tagged_controller" public="false"/>
+    <service id="console.command.public_alias.App\Command\ImportCommand" alias="App\Command\ImportCommand" public="true"/>
   </services>
 </container>

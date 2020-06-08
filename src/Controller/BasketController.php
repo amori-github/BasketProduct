@@ -58,17 +58,17 @@ class BasketController extends AbstractController
             ->getRepository(Product::class)
             ->find($id);
 
-        if ($product->getId()) {
+       if ($product->getId()) {
             $this->basket->add($product);
-        }
+       }
 
         if ($request->query->get('qte') != null) {
             $qte = $request->query->get('qte');
             $this->basket->update($product, $qte);
         }
 
-
         $this->addFlash('success', 'Le produit est ajouté avec succès !');
+
         return $this->redirectToRoute('basket', [
             'id' => $product->getId(),
         ]);

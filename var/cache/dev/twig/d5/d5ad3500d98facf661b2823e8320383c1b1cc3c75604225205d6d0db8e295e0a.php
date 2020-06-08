@@ -85,30 +85,31 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "    <div class=\"container mt-3\" style=\"border-style: groove;background-color: white\">
+        echo "
+    <div class=\"container mt-3\" style=\"border-style: groove;background-color: white\">
         <div class=\"row justify-content-between\">
-            ";
-        // line 11
-        echo "            <div id=\"easyadmin-lightbox-";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 11, $this->source); })()), "id", [], "any", false, false, false, 11), "html", null, true);
+
+            <div id=\"easyadmin-lightbox-";
+        // line 10
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 10, $this->source); })()), "id", [], "any", false, false, false, 10), "html", null, true);
         echo "\" class=\"easyadmin-lightbox\">
                 ";
-        // line 13
+        // line 12
         echo "                <img src=\"";
-        echo twig_escape_filter($this->env, $this->extensions['Vich\UploaderBundle\Twig\Extension\UploaderExtension']->asset((isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 13, $this->source); })()), "imageFile"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Vich\UploaderBundle\Twig\Extension\UploaderExtension']->asset((isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 12, $this->source); })()), "imageFile"), "html", null, true);
         echo "\" class=\"image-style\"  height=\"200\" alt=\"";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 13, $this->source); })()), "nom", [], "any", false, false, false, 13), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 12, $this->source); })()), "nom", [], "any", false, false, false, 12), "html", null, true);
         echo "\">
             </div>
             <div class=\"col-md-8\">
                 <h3>";
-        // line 16
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 16, $this->source); })()), "nom", [], "any", false, false, false, 16), "html", null, true);
+        // line 15
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 15, $this->source); })()), "nom", [], "any", false, false, false, 15), "html", null, true);
         echo "</h3>
                 <h5>Carateristiques:</h5>
                 <p>";
-        // line 18
-        echo nl2br(twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 18, $this->source); })()), "description", [], "any", false, false, false, 18), "html", null, true));
+        // line 17
+        echo nl2br(twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 17, $this->source); })()), "description", [], "any", false, false, false, 17), "html", null, true));
         echo "</p>
 
             </div>
@@ -117,14 +118,14 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
                     <div class=\"card-body\">
                         <h5 class=\"card-title\" style=\"color: red\">
                             ";
-        // line 25
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 25, $this->source); })()), "prix", [], "any", false, false, false, 25), "html", null, true);
+        // line 24
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 24, $this->source); })()), "prix", [], "any", false, false, false, 24), "html", null, true);
         echo " €
                         </h5>
                         <p class=\"card-text\">
                         <form action=\"";
-        // line 28
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("basket.add", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 28, $this->source); })()), "id", [], "any", false, false, false, 28)]), "html", null, true);
+        // line 27
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("basket.add", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 27, $this->source); })()), "id", [], "any", false, false, false, 27)]), "html", null, true);
         echo "\" method=\"get\">
                             Quantité <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" value=\"1\" name=\"qte\"/>
                         </p>
@@ -139,6 +140,10 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
         </div>
 
     </div>
+
+
+
+
 
 ";
         
@@ -161,7 +166,7 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
 
     public function getDebugInfo()
     {
-        return array (  127 => 28,  121 => 25,  111 => 18,  106 => 16,  97 => 13,  92 => 11,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  128 => 27,  122 => 24,  112 => 17,  107 => 15,  98 => 12,  94 => 10,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -171,11 +176,10 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
 {% block title product.nom  %}
 
 {% block body %}
+
     <div class=\"container mt-3\" style=\"border-style: groove;background-color: white\">
         <div class=\"row justify-content-between\">
-            {#<div class=\"col-md-2\">
-                <img  class=\"image-style\" src=\"#\" height=\"200\" alt=\"{{ product.nom }}\" />
-            </div>#}
+
             <div id=\"easyadmin-lightbox-{{ product.id }}\" class=\"easyadmin-lightbox\">
                 {# the second parameter is the name of the property with the UploadableField annotation #}
                 <img src=\"{{ vich_uploader_asset(product, 'imageFile') }}\" class=\"image-style\"  height=\"200\" alt=\"{{ product.nom }}\">
@@ -207,6 +211,10 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
         </div>
 
     </div>
+
+
+
+
 
 {% endblock %}
 

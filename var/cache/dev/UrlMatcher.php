@@ -17,9 +17,10 @@ return [
         '/clear' => [[['_route' => 'basket.clear', '_controller' => 'App\\Controller\\BasketController::clear'], null, null, null, false, false, null]],
         '/nbarticle' => [[['_route' => 'basket.nbarticle', '_controller' => 'App\\Controller\\BasketController::nbarticle'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'product.index', '_controller' => 'App\\Controller\\ProductController::index'], null, null, null, false, false, null]],
+        '/product/exportjson' => [[['_route' => 'product.export.json', '_controller' => 'App\\Controller\\ProductController::exportjson'], null, ['GET' => 0], null, false, false, null]],
+        '/product/exportcsv' => [[['_route' => 'product.export.csv', '_controller' => 'App\\Controller\\ProductController::ExportCsv'], null, ['GET' => 0], null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
-        '/test' => [[['_route' => 'test', '_controller' => 'App\\Controller\\TestController::index'], null, null, null, false, false, null]],
         '/admin' => [[['_route' => 'easyadmin', '_controller' => 'EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\EasyAdminController::indexAction'], null, null, null, true, false, null]],
     ],
     [ // $regexpList
@@ -41,7 +42,7 @@ return [
                 .')'
                 .'|/add/([^/]++)(*:182)'
                 .'|/remove/([^/]++)(*:206)'
-                .'|/product/show/([^/]++)(*:236)'
+                .'|/product/([a-z0-9\\-]*)\\-([^/]++)(*:246)'
             .')/?$}sD',
     ],
     [ // $dynamicRoutes
@@ -54,8 +55,8 @@ return [
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         182 => [[['_route' => 'basket.add', '_controller' => 'App\\Controller\\BasketController::add'], ['id'], null, null, false, true, null]],
         206 => [[['_route' => 'basket.remove', '_controller' => 'App\\Controller\\BasketController::remove'], ['id'], null, null, false, true, null]],
-        236 => [
-            [['_route' => 'product.show', '_controller' => 'App\\Controller\\ProductController::show'], ['id'], null, null, false, true, null],
+        246 => [
+            [['_route' => 'product.show', '_controller' => 'App\\Controller\\ProductController::show'], ['slug', 'id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
