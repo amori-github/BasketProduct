@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="OHfRSIm" resname="Catalog">
+        <source>Catalog</source>
+        <target>Catalogue</target>
+      </trans-unit>
+      <trans-unit id="NwMveM0" resname="Your Basket">
+        <source>Your Basket</source>
+        <target>Votre panier</target>
+      </trans-unit>
+      <trans-unit id="zIhoLAU" resname="My basket">
+        <source>My basket</source>
+        <target>Mon panier</target>
+      </trans-unit>
+      <trans-unit id="_574lBd" resname="Product">
+        <source>Product</source>
+        <target>Produit</target>
+      </trans-unit>
+      <trans-unit id="k8kchR5" resname="Price">
+        <source>Price</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="giurjUG" resname="Quantity">
+        <source>Quantity</source>
+        <target>Quantité</target>
+      </trans-unit>
+      <trans-unit id="ybPDgkf" resname="Total">
+        <source>Total</source>
+        <target>Total</target>
+      </trans-unit>
+      <trans-unit id="6SE4YTe" resname="Basket is empty">
+        <source>Basket is empty</source>
+        <target>Panier est vide</target>
+      </trans-unit>
+      <trans-unit id="xBTfyr7" resname="Total Order:">
+        <source>Total Order:</source>
+        <target>Total Commande:</target>
+      </trans-unit>
+      <trans-unit id="JaUu6C4" resname="empty the basket">
+        <source>empty the basket</source>
+        <target>Vider le panier</target>
+      </trans-unit>
+      <trans-unit id="JkBu4ul" resname="Characteristics:">
+        <source>Characteristics:</source>
+        <target>Carateristiques:</target>
+      </trans-unit>
+      <trans-unit id="pYHtpQO" resname="Add to Cart!">
+        <source>Add to Cart!</source>
+        <target>Au panier!</target>
+      </trans-unit>
+      <trans-unit id="wXSap4T" resname="Product Catalog">
+        <source>Product Catalog</source>
+        <target>Catalogue de Produits</target>
+      </trans-unit>
+      <trans-unit id="Pkp2Ifi" resname="Export json products">
+        <source>Export json products</source>
+        <target>Export produit json</target>
+      </trans-unit>
+      <trans-unit id="cdtH4W." resname="Export CSV products">
+        <source>Export CSV products</source>
+        <target>Export produit CSV</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -22,16 +22,25 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link {% if Current_menu is defined and Current_menu == 'products' %}active{% endif %}"
-                   href="{{ path('product.index') }}">Catalogue</a>
+                   href="{{ path('product.index') }}">{% trans %}Catalog{% endtrans %}</a>
             </li>
 
         </ul>
 
-
+        <ul class="navbar-nav mr-auto">
+           {% for locale in locales %}
+                {% if locale != app.request.locale %}
+                    <a href="{{ path('change_locale', {'locale': locale}) }}">
+                        <img src="{{ asset('icones/'~locale~'.png') }}" alt="{{ locale }}" title="{{ locale }}">
+                       {# {{ locale }}#}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </ul>
     </div>
+
+
     {{ render(controller('App\\Controller\\BasketController::nbarticle')) }}
-
-
 
 
 

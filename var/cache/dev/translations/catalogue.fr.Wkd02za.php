@@ -201,6 +201,24 @@ $catalogue = new MessageCatalogue('fr', array (
     'filter.label.is_before_or_same' => 'est antérieure à ou est le',
     'security.list.hidden_results' => 'Certains résultats ne peuvent pas être affichés car vous n\'avez pas la permission',
   ),
+  'messages+intl-icu' => 
+  array (
+    'Catalog' => 'Catalogue',
+    'Your Basket' => 'Votre panier',
+    'My basket' => 'Mon panier',
+    'Product' => 'Produit',
+    'Price' => 'Prix',
+    'Quantity' => 'Quantité',
+    'Total' => 'Total',
+    'Basket is empty' => 'Panier est vide',
+    'Total Order:' => 'Total Commande:',
+    'empty the basket' => 'Vider le panier',
+    'Characteristics:' => 'Carateristiques:',
+    'Add to Cart!' => 'Au panier!',
+    'Product Catalog' => 'Catalogue de Produits',
+    'Export json products' => 'Export produit json',
+    'Export CSV products' => 'Export produit CSV',
+  ),
   'messages' => 
   array (
     'action.new' => 'Créer %entity_label%',

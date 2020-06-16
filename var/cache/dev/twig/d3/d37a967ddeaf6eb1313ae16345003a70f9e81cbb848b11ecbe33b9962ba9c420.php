@@ -65,7 +65,7 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Hello BasketController!";
+        echo "Basket";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -89,7 +89,10 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
 
     <div class=\"container mt-3\">
 
-        <h2>Mon panier</h2>
+        <h2>";
+        // line 11
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("My basket", [], "messages");
+        echo "</h2>
         <div class=\"col-md-10\">
             ";
         // line 13
@@ -126,10 +129,22 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
             <table class=\"table table-striped table-hover\">
                 <thead>
                 <tr>
-                    <th>Produit</th>
-                    <th>prix</th>
-                    <th>Quantité</th>
-                    <th>Total</th>
+                    <th>";
+        // line 24
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Product", [], "messages");
+        echo "</th>
+                    <th>";
+        // line 25
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Price", [], "messages");
+        echo "</th>
+                    <th>";
+        // line 26
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Quantity", [], "messages");
+        echo "</th>
+                    <th>";
+        // line 27
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Total", [], "messages");
+        echo "</th>
 
                 </tr>
                 </thead>
@@ -139,7 +154,10 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
         if (0 === twig_compare(twig_length_filter($this->env, (isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 32, $this->source); })())), 0)) {
             // line 33
             echo "                    <tr>
-                        <td colspan=\"6\" class=\"text-center\">Panier est vide</td>
+                        <td colspan=\"6\" class=\"text-center\">";
+            // line 34
+            echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Basket is empty", [], "messages");
+            echo "</td>
                     </tr>
                 ";
         }
@@ -197,7 +215,10 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
         echo "                </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan=\"3\" class=\"text-right\">Total Commande:</th>
+                    <th colspan=\"3\" class=\"text-right\">";
+        // line 63
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Total Order:", [], "messages");
+        echo "</th>
                     <th>";
         // line 64
         echo twig_escape_filter($this->env, (isset($context["totalPrice"]) || array_key_exists("totalPrice", $context) ? $context["totalPrice"] : (function () { throw new RuntimeError('Variable "totalPrice" does not exist.', 64, $this->source); })()), "html", null, true);
@@ -209,7 +230,9 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
                             <a class=\"btn btn-primary\" role=\"button\"  href=\"";
         // line 69
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("basket.clear");
-        echo "\">Vider le panier</a>
+        echo "\">";
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("empty the basket", [], "messages");
+        echo "</a>
                         </p>
                     </th>
 
@@ -244,14 +267,14 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
 
     public function getDebugInfo()
     {
-        return array (  211 => 69,  203 => 64,  197 => 60,  183 => 52,  175 => 47,  170 => 45,  164 => 42,  160 => 41,  154 => 39,  150 => 38,  147 => 37,  141 => 33,  139 => 32,  125 => 20,  119 => 19,  110 => 16,  105 => 15,  100 => 14,  96 => 13,  88 => 7,  78 => 6,  59 => 3,  36 => 1,);
+        return array (  232 => 69,  224 => 64,  220 => 63,  215 => 60,  201 => 52,  193 => 47,  188 => 45,  182 => 42,  178 => 41,  172 => 39,  168 => 38,  165 => 37,  159 => 34,  156 => 33,  154 => 32,  146 => 27,  142 => 26,  138 => 25,  134 => 24,  128 => 20,  122 => 19,  113 => 16,  108 => 15,  103 => 14,  99 => 13,  94 => 11,  88 => 7,  78 => 6,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Hello BasketController!{% endblock %}
+{% block title %}Basket{% endblock %}
 
 
 {% block body %}
@@ -259,7 +282,7 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
 
     <div class=\"container mt-3\">
 
-        <h2>Mon panier</h2>
+        <h2>{%trans%}My basket{%endtrans%}</h2>
         <div class=\"col-md-10\">
             {% for type, flash_messages in app.session.flashBag.all %}
                 {% for msg in flash_messages %}
@@ -272,17 +295,17 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
             <table class=\"table table-striped table-hover\">
                 <thead>
                 <tr>
-                    <th>Produit</th>
-                    <th>prix</th>
-                    <th>Quantité</th>
-                    <th>Total</th>
+                    <th>{%trans%}Product{%endtrans%}</th>
+                    <th>{%trans%}Price{%endtrans%}</th>
+                    <th>{%trans%}Quantity{%endtrans%}</th>
+                    <th>{%trans%}Total{%endtrans%}</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 {% if  products | length == 0  %}
                     <tr>
-                        <td colspan=\"6\" class=\"text-center\">Panier est vide</td>
+                        <td colspan=\"6\" class=\"text-center\">{%trans%}Basket is empty{%endtrans%}</td>
                     </tr>
                 {% endif %}
 
@@ -311,13 +334,13 @@ class __TwigTemplate_0088127394ff52c584532434008f102ac0a46aa83e34cfb8b5bc95d0b6e
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan=\"3\" class=\"text-right\">Total Commande:</th>
+                    <th colspan=\"3\" class=\"text-right\">{%trans%}Total Order:{%endtrans%}</th>
                     <th>{{ totalPrice }} </th>
                 </tr>
                 <tr>
                     <th colspan=\"5\" class=\"text-right\">
                         <p class=\"card-text\">
-                            <a class=\"btn btn-primary\" role=\"button\"  href=\"{{ path('basket.clear') }}\">Vider le panier</a>
+                            <a class=\"btn btn-primary\" role=\"button\"  href=\"{{ path('basket.clear') }}\">{%trans%}empty the basket{%endtrans%}</a>
                         </p>
                     </th>
 

@@ -26,5 +26,6 @@ return [
     'product.export.csv' => [[], ['_controller' => 'App\\Controller\\ProductController::ExportCsv'], [], [['text', '/product/exportcsv']], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\SecurityController::logout'], [], [['text', '/logout']], [], []],
+    'change_locale' => [['locale'], ['_controller' => 'App\\Controller\\TranslationController::changeLocale'], [], [['variable', '/', '[^/]++', 'locale'], ['text', '/change_locale']], [], []],
     'easyadmin' => [[], ['_controller' => 'EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\EasyAdminController::indexAction'], [], [['text', '/admin/']], [], []],
 ];

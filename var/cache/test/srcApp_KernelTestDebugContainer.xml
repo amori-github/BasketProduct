@@ -92,6 +92,10 @@
     <parameter key="container.dumper.inline_class_loader">true</parameter>
     <parameter key="container.dumper.inline_factories">true</parameter>
     <parameter key="app.path.product_images">/uploads/images/products</parameter>
+    <parameter key="app.locales" type="collection">
+      <parameter>fr</parameter>
+      <parameter>en</parameter>
+    </parameter>
     <parameter key="fragment.renderer.hinclude.global_template"></parameter>
     <parameter key="fragment.path">/_fragment</parameter>
     <parameter key="kernel.secret">%env(APP_SECRET)%</parameter>
@@ -511,12 +515,23 @@
         <argument type="service" id=".service_locator.vdmMuyE.App\Controller\SecurityController"/>
       </call>
     </service>
+    <service id="App\Controller\TranslationController" class="App\Controller\TranslationController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.vdmMuyE.App\Controller\TranslationController"/>
+      </call>
+    </service>
     <service id="App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
     <service id="App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
       <argument type="service" id="security.user_password_encoder.generic"/>
+    </service>
+    <service id="App\EventSubscriber\LocaleSubscriber" class="App\EventSubscriber\LocaleSubscriber" autowire="true" autoconfigure="true">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
     </service>
     <service id="App\Repository\ProductRepository" class="App\Repository\ProductRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -532,6 +547,7 @@
       <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="security.user_password_encoder.generic"/>
     </service>
+    <service id="App\Services\ConvertCsvToArray" class="App\Services\ConvertCsvToArray" autowire="true" autoconfigure="true"/>
     <service id=".legacy_controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -1245,9 +1261,11 @@
       <argument type="collection">
         <argument key="App\DataFixtures\ProductFixture" type="service" id="App\DataFixtures\ProductFixture" on-invalid="ignore_uninitialized"/>
         <argument key="App\DataFixtures\UserFixtures" type="service" id="App\DataFixtures\UserFixtures" on-invalid="ignore_uninitialized"/>
+        <argument key="App\EventSubscriber\LocaleSubscriber" type="service" id="App\EventSubscriber\LocaleSubscriber" on-invalid="ignore_uninitialized"/>
         <argument key="App\Repository\ProductRepository" type="service" id="App\Repository\ProductRepository" on-invalid="ignore_uninitialized"/>
         <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository" on-invalid="ignore_uninitialized"/>
         <argument key="App\Security\LoginFormAuthenticator" type="service" id="App\Security\LoginFormAuthenticator" on-invalid="ignore_uninitialized"/>
+        <argument key="App\Services\ConvertCsvToArray" type="service" id="App\Services\ConvertCsvToArray" on-invalid="ignore_uninitialized"/>
         <argument key="Doctrine\Common\Annotations\Reader" type="service" id="annotations.cached_reader" on-invalid="ignore_uninitialized"/>
         <argument key="Doctrine\Common\Persistence\ManagerRegistry" type="service" id="doctrine" on-invalid="ignore_uninitialized"/>
         <argument key="Doctrine\DBAL\Connection" type="service" id="doctrine.dbal.default_connection" on-invalid="ignore_uninitialized"/>
@@ -2511,6 +2529,9 @@
             <argument>/opt/lampp/htdocs/BasketProduct/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.fr.xlf</argument>
             <argument>/opt/lampp/htdocs/BasketProduct/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.fr.xlf</argument>
             <argument>/opt/lampp/htdocs/BasketProduct/vendor/vich/uploader-bundle/translations/VichUploaderBundle.fr.yml</argument>
+            <argument>/opt/lampp/htdocs/BasketProduct/translations/messages+intl-icu.fr.xlf</argument>
+            <argument>/opt/lampp/htdocs/BasketProduct/translations/security.fr.xlf</argument>
+            <argument>/opt/lampp/htdocs/BasketProduct/translations/validators.fr.xlf</argument>
           </argument>
           <argument key="gl" type="collection">
             <argument>/opt/lampp/htdocs/BasketProduct/vendor/symfony/validator/Resources/translations/validators.gl.xlf</argument>
@@ -3298,6 +3319,14 @@
           <argument>initializeRequest</argument>
         </argument>
         <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="App\EventSubscriber\LocaleSubscriber"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>20</argument>
       </call>
       <call method="addListener">
         <argument>kernel.response</argument>
@@ -4193,6 +4222,13 @@
       </call>
       <call method="addRuntimeLoader">
         <argument type="service" id="twig.runtime_loader"/>
+      </call>
+      <call method="addGlobal">
+        <argument>locales</argument>
+        <argument type="collection">
+          <argument>fr</argument>
+          <argument>en</argument>
+        </argument>
       </call>
       <configurator service="twig.configurator.environment" method="configure"/>
     </service>
@@ -6512,10 +6548,15 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TranslationController" class="App\Controller\TranslationController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TranslationController" class="App\Controller\TranslationController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\TranslationController" class="App\Controller\TranslationController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\ProductFixture" class="App\DataFixtures\ProductFixture" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\EventDispatcher\EventSubscriberInterface.0.App\EventSubscriber\LocaleSubscriber" class="App\EventSubscriber\LocaleSubscriber" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\EventSubscriber\LocaleSubscriber" class="App\EventSubscriber\LocaleSubscriber" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ProductRepository" class="App\Repository\ProductRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ProductRepository" class="App\Repository\ProductRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
@@ -6856,6 +6897,12 @@
     <service id=".service_locator.vdmMuyE.App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\SecurityController"/>
       <argument>App\Controller\SecurityController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.vdmMuyE" method="withContext"/>
+    </service>
+    <service id=".service_locator.vdmMuyE.App\Controller\TranslationController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\TranslationController"/>
+      <argument>App\Controller\TranslationController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.vdmMuyE" method="withContext"/>
     </service>

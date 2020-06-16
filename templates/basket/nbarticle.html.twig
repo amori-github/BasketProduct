@@ -1,4 +1,6 @@
-<a  {% if articles != 0 %} class="btn btn-success"  {% else %} class="btn btn-light" {% endif %} role="button" href="{{ path('basket') }}"><i class="fas fa-shopping-cart"></i> Votre Panier
+<a  {% if articles != 0 %} class="btn btn-success"  {% else %} class="btn btn-light" {% endif %} role="button" href="{{ path('basket') }}">
+    <i class="fas fa-shopping-cart"></i>
+    {% trans from "messages"  %}Your Basket{% endtrans %}
     <span class="badge badge-light">
         {% if articles == 0 %}
             0

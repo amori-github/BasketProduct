@@ -79,30 +79,65 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
                    href=\"";
         // line 25
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.index");
-        echo "\">Catalogue</a>
+        echo "\">";
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Catalog", [], "messages");
+        echo "</a>
             </li>
 
         </ul>
 
-
+        <ul class=\"navbar-nav mr-auto\">
+           ";
+        // line 31
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["locales"]) || array_key_exists("locales", $context) ? $context["locales"] : (function () { throw new RuntimeError('Variable "locales" does not exist.', 31, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["locale"]) {
+            // line 32
+            echo "                ";
+            if (0 !== twig_compare($context["locale"], twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 32, $this->source); })()), "request", [], "any", false, false, false, 32), "locale", [], "any", false, false, false, 32))) {
+                // line 33
+                echo "                    <a href=\"";
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("change_locale", ["locale" => $context["locale"]]), "html", null, true);
+                echo "\">
+                        <img src=\"";
+                // line 34
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl((("icones/" . $context["locale"]) . ".png")), "html", null, true);
+                echo "\" alt=\"";
+                echo twig_escape_filter($this->env, $context["locale"], "html", null, true);
+                echo "\" title=\"";
+                echo twig_escape_filter($this->env, $context["locale"], "html", null, true);
+                echo "\">
+                       ";
+                // line 36
+                echo "                    </a>
+                ";
+            }
+            // line 38
+            echo "            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['locale'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 39
+        echo "        </ul>
     </div>
+
+
     ";
-        // line 32
+        // line 43
         echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragment(Symfony\Bridge\Twig\Extension\HttpKernelExtension::controller("App\\Controller\\BasketController::nbarticle"));
         echo "
-
-
 
 
 
 </nav>
 </header>
 ";
-        // line 40
+        // line 49
         $this->displayBlock('body', $context, $blocks);
-        // line 41
+        // line 50
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 45
+        // line 54
         echo "</body>
 </html>
 ";
@@ -157,7 +192,7 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 
     }
 
-    // line 40
+    // line 49
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -175,7 +210,7 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 
     }
 
-    // line 41
+    // line 50
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -185,7 +220,7 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 42
+        // line 51
         echo "    ";
         echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("app");
         echo "
@@ -211,7 +246,7 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 
     public function getDebugInfo()
     {
-        return array (  189 => 42,  179 => 41,  161 => 40,  147 => 7,  137 => 6,  118 => 5,  106 => 45,  104 => 41,  102 => 40,  91 => 32,  81 => 25,  75 => 24,  59 => 10,  57 => 6,  53 => 5,  47 => 1,);
+        return array (  224 => 51,  214 => 50,  196 => 49,  182 => 7,  172 => 6,  153 => 5,  141 => 54,  139 => 50,  137 => 49,  128 => 43,  122 => 39,  116 => 38,  112 => 36,  104 => 34,  99 => 33,  96 => 32,  92 => 31,  81 => 25,  75 => 24,  59 => 10,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -240,16 +275,25 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
         <ul class=\"navbar-nav mr-auto\">
             <li class=\"nav-item\">
                 <a class=\"nav-link {% if Current_menu is defined and Current_menu == 'products' %}active{% endif %}\"
-                   href=\"{{ path('product.index') }}\">Catalogue</a>
+                   href=\"{{ path('product.index') }}\">{% trans %}Catalog{% endtrans %}</a>
             </li>
 
         </ul>
 
-
+        <ul class=\"navbar-nav mr-auto\">
+           {% for locale in locales %}
+                {% if locale != app.request.locale %}
+                    <a href=\"{{ path('change_locale', {'locale': locale}) }}\">
+                        <img src=\"{{ asset('icones/'~locale~'.png') }}\" alt=\"{{ locale }}\" title=\"{{ locale }}\">
+                       {# {{ locale }}#}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </ul>
     </div>
+
+
     {{ render(controller('App\\\\Controller\\\\BasketController::nbarticle')) }}
-
-
 
 
 

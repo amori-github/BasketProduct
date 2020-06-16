@@ -65,7 +65,7 @@ class __TwigTemplate_6aea1c37c20a1ceb1647bd2784a6af8698c8efe6667dbb0de948997d48b
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Log in!";
+        echo "Login!";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -164,7 +164,7 @@ class __TwigTemplate_6aea1c37c20a1ceb1647bd2784a6af8698c8efe6667dbb0de948997d48b
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Login!{% endblock %}
 
 {% block body %}
 <form method=\"post\" style=\"width: 50%; margin: auto;\">

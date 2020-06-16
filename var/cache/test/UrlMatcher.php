@@ -12,6 +12,8 @@ return [
         '/clear' => [[['_route' => 'basket.clear', '_controller' => 'App\\Controller\\BasketController::clear'], null, null, null, false, false, null]],
         '/nbarticle' => [[['_route' => 'basket.nbarticle', '_controller' => 'App\\Controller\\BasketController::nbarticle'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'product.index', '_controller' => 'App\\Controller\\ProductController::index'], null, null, null, false, false, null]],
+        '/product/exportjson' => [[['_route' => 'product.export.json', '_controller' => 'App\\Controller\\ProductController::exportjson'], null, ['GET' => 0], null, false, false, null]],
+        '/product/exportcsv' => [[['_route' => 'product.export.csv', '_controller' => 'App\\Controller\\ProductController::ExportCsv'], null, ['GET' => 0], null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
         '/admin' => [[['_route' => 'easyadmin', '_controller' => 'EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\EasyAdminController::indexAction'], null, null, null, true, false, null]],
@@ -21,13 +23,15 @@ return [
                 .'|/add/([^/]++)(*:20)'
                 .'|/remove/([^/]++)(*:43)'
                 .'|/product/([a-z0-9\\-]*)\\-([^/]++)(*:82)'
+                .'|/change_locale/([^/]++)(*:112)'
             .')/?$}sD',
     ],
     [ // $dynamicRoutes
         20 => [[['_route' => 'basket.add', '_controller' => 'App\\Controller\\BasketController::add'], ['id'], null, null, false, true, null]],
         43 => [[['_route' => 'basket.remove', '_controller' => 'App\\Controller\\BasketController::remove'], ['id'], null, null, false, true, null]],
-        82 => [
-            [['_route' => 'product.show', '_controller' => 'App\\Controller\\ProductController::show'], ['slug', 'id'], null, null, false, true, null],
+        82 => [[['_route' => 'product.show', '_controller' => 'App\\Controller\\ProductController::show'], ['slug', 'id'], null, null, false, true, null]],
+        112 => [
+            [['_route' => 'change_locale', '_controller' => 'App\\Controller\\TranslationController::changeLocale'], ['locale'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

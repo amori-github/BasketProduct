@@ -106,7 +106,10 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
         // line 15
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 15, $this->source); })()), "nom", [], "any", false, false, false, 15), "html", null, true);
         echo "</h3>
-                <h5>Carateristiques:</h5>
+                <h5>";
+        // line 16
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Characteristics:", [], "messages");
+        echo "</h5>
                 <p>";
         // line 17
         echo nl2br(twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 17, $this->source); })()), "description", [], "any", false, false, false, 17), "html", null, true));
@@ -127,11 +130,17 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
         // line 27
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("basket.add", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 27, $this->source); })()), "id", [], "any", false, false, false, 27)]), "html", null, true);
         echo "\" method=\"get\">
-                            Quantité <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" value=\"1\" name=\"qte\"/>
+                            ";
+        // line 28
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Quantity", [], "messages");
+        echo " <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" value=\"1\" name=\"qte\"/>
                         </p>
 
                         <p class=\"card-text\">
-                            <button class=\"btn btn-success btn-lg\" >Au panier!</button>
+                            <button class=\"btn btn-success btn-lg\" >";
+        // line 32
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Add to Cart!", [], "messages");
+        echo "</button>
                         </p>
                         </form>
                     </div>
@@ -166,7 +175,7 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
 
     public function getDebugInfo()
     {
-        return array (  128 => 27,  122 => 24,  112 => 17,  107 => 15,  98 => 12,  94 => 10,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  142 => 32,  135 => 28,  131 => 27,  125 => 24,  115 => 17,  111 => 16,  107 => 15,  98 => 12,  94 => 10,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -186,7 +195,7 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
             </div>
             <div class=\"col-md-8\">
                 <h3>{{ product.nom }}</h3>
-                <h5>Carateristiques:</h5>
+                <h5>{%trans%}Characteristics:{%endtrans%}</h5>
                 <p>{{ product.description  | nl2br  }}</p>
 
             </div>
@@ -198,11 +207,11 @@ class __TwigTemplate_b1198eb228b6b9eb2d89f55290676349def3e1548d4f4c62760e1ad51ba
                         </h5>
                         <p class=\"card-text\">
                         <form action=\"{{ path('basket.add', {'id': product.id}) }}\" method=\"get\">
-                            Quantité <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" value=\"1\" name=\"qte\"/>
+                            {%trans%}Quantity{%endtrans%} <input  type=\"number\" style=\"width: 30%\" max=\"99\" min=\"1\" value=\"1\" name=\"qte\"/>
                         </p>
 
                         <p class=\"card-text\">
-                            <button class=\"btn btn-success btn-lg\" >Au panier!</button>
+                            <button class=\"btn btn-success btn-lg\" >{%trans%}Add to Cart!{%endtrans%}</button>
                         </p>
                         </form>
                     </div>

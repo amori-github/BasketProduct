@@ -43,6 +43,7 @@ return [
                 .'|/add/([^/]++)(*:182)'
                 .'|/remove/([^/]++)(*:206)'
                 .'|/product/([a-z0-9\\-]*)\\-([^/]++)(*:246)'
+                .'|/change_locale/([^/]++)(*:277)'
             .')/?$}sD',
     ],
     [ // $dynamicRoutes
@@ -55,8 +56,9 @@ return [
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         182 => [[['_route' => 'basket.add', '_controller' => 'App\\Controller\\BasketController::add'], ['id'], null, null, false, true, null]],
         206 => [[['_route' => 'basket.remove', '_controller' => 'App\\Controller\\BasketController::remove'], ['id'], null, null, false, true, null]],
-        246 => [
-            [['_route' => 'product.show', '_controller' => 'App\\Controller\\ProductController::show'], ['slug', 'id'], null, null, false, true, null],
+        246 => [[['_route' => 'product.show', '_controller' => 'App\\Controller\\ProductController::show'], ['slug', 'id'], null, null, false, true, null]],
+        277 => [
+            [['_route' => 'change_locale', '_controller' => 'App\\Controller\\TranslationController::changeLocale'], ['locale'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

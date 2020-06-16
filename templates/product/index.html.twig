@@ -6,12 +6,13 @@
 
 
     <div class="container mt-4">
-        <h3>Catalogue de Produits</h3>
+        <h3>{%trans%}Product Catalog{%endtrans%}</h3>
         <p class="card-text">
-            <a class="btn btn-primary" role="button"  href="{{ path('product.export.json') }}">Exporter Les produit json</a>
+            <a class="btn btn-primary" role="button"  href="{{ path('product.export.json') }}">{%trans%}Export json products{%endtrans%}</a>
         </p>
+
         <p class="card-text">
-            <a class="btn btn-primary" role="button"  href="{{ path('product.export.csv') }}">Exporter Les produit CSV</a>
+            <a class="btn btn-primary" role="button"  href="{{ path('product.export.csv') }}">{%trans%}Export CSV products{%endtrans%}</a>
         </p>
 
         <div class="row flex">

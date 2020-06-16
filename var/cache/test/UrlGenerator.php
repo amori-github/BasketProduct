@@ -10,7 +10,10 @@ return [
     'basket.nbarticle' => [[], ['_controller' => 'App\\Controller\\BasketController::nbarticle'], [], [['text', '/nbarticle']], [], []],
     'product.index' => [[], ['_controller' => 'App\\Controller\\ProductController::index'], [], [['text', '/']], [], []],
     'product.show' => [['slug', 'id'], ['_controller' => 'App\\Controller\\ProductController::show'], ['slug' => '[a-z0-9\\-]*'], [['variable', '-', '[^/]++', 'id'], ['variable', '/', '[a-z0-9\\-]*', 'slug'], ['text', '/product']], [], []],
+    'product.export.json' => [[], ['_controller' => 'App\\Controller\\ProductController::exportjson'], [], [['text', '/product/exportjson']], [], []],
+    'product.export.csv' => [[], ['_controller' => 'App\\Controller\\ProductController::ExportCsv'], [], [['text', '/product/exportcsv']], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\SecurityController::logout'], [], [['text', '/logout']], [], []],
+    'change_locale' => [['locale'], ['_controller' => 'App\\Controller\\TranslationController::changeLocale'], [], [['variable', '/', '[^/]++', 'locale'], ['text', '/change_locale']], [], []],
     'easyadmin' => [[], ['_controller' => 'EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\EasyAdminController::indexAction'], [], [['text', '/admin/']], [], []],
 ];

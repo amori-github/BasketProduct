@@ -48,22 +48,27 @@ class __TwigTemplate_cfdacddc262ffebfdc6d2ff627bb1195c8722abf88554e394cbb6fb8713
         }
         echo " role=\"button\" href=\"";
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("basket");
-        echo "\"><i class=\"fas fa-shopping-cart\"></i> Votre Panier
-    <span class=\"badge badge-light\">
-        ";
+        echo "\">
+    <i class=\"fas fa-shopping-cart\"></i>
+    ";
         // line 3
-        if (0 === twig_compare((isset($context["articles"]) || array_key_exists("articles", $context) ? $context["articles"] : (function () { throw new RuntimeError('Variable "articles" does not exist.', 3, $this->source); })()), 0)) {
-            // line 4
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Your Basket", [], "messages");
+        // line 4
+        echo "    <span class=\"badge badge-light\">
+        ";
+        // line 5
+        if (0 === twig_compare((isset($context["articles"]) || array_key_exists("articles", $context) ? $context["articles"] : (function () { throw new RuntimeError('Variable "articles" does not exist.', 5, $this->source); })()), 0)) {
+            // line 6
             echo "            0
         ";
         } else {
-            // line 6
+            // line 8
             echo "            ";
-            echo twig_escape_filter($this->env, (isset($context["articles"]) || array_key_exists("articles", $context) ? $context["articles"] : (function () { throw new RuntimeError('Variable "articles" does not exist.', 6, $this->source); })()), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["articles"]) || array_key_exists("articles", $context) ? $context["articles"] : (function () { throw new RuntimeError('Variable "articles" does not exist.', 8, $this->source); })()), "html", null, true);
             echo "
         ";
         }
-        // line 8
+        // line 10
         echo "    </span>
 </a>";
         
@@ -86,12 +91,14 @@ class __TwigTemplate_cfdacddc262ffebfdc6d2ff627bb1195c8722abf88554e394cbb6fb8713
 
     public function getDebugInfo()
     {
-        return array (  67 => 8,  61 => 6,  57 => 4,  55 => 3,  43 => 1,);
+        return array (  72 => 10,  66 => 8,  62 => 6,  60 => 5,  57 => 4,  55 => 3,  43 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("<a  {% if articles != 0 %} class=\"btn btn-success\"  {% else %} class=\"btn btn-light\" {% endif %} role=\"button\" href=\"{{ path('basket') }}\"><i class=\"fas fa-shopping-cart\"></i> Votre Panier
+        return new Source("<a  {% if articles != 0 %} class=\"btn btn-success\"  {% else %} class=\"btn btn-light\" {% endif %} role=\"button\" href=\"{{ path('basket') }}\">
+    <i class=\"fas fa-shopping-cart\"></i>
+    {% trans from \"messages\"  %}Your Basket{% endtrans %}
     <span class=\"badge badge-light\">
         {% if articles == 0 %}
             0
