@@ -92,9 +92,10 @@ class __TwigTemplate_fecf7faf8e02b5a35e02ff40e5e44c2484618eaa444a40a90ce8909a833
         // line 9
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Product Catalog", [], "messages");
         echo "</h3>
-        <p class=\"card-text\">
+       <div style=\"display:flex; justify-content: flex-end;\">
+        <p class=\"card-text\" style=\"margin-right:20px;\" >
             <a class=\"btn btn-primary\" role=\"button\"  href=\"";
-        // line 11
+        // line 12
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.export.json");
         echo "\">";
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Export json products", [], "messages");
@@ -103,57 +104,58 @@ class __TwigTemplate_fecf7faf8e02b5a35e02ff40e5e44c2484618eaa444a40a90ce8909a833
 
         <p class=\"card-text\">
             <a class=\"btn btn-primary\" role=\"button\"  href=\"";
-        // line 15
+        // line 16
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.export.csv");
         echo "\">";
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Export CSV products", [], "messages");
         echo "</a>
         </p>
+       </div>
 
         <div class=\"row flex\">
             ";
-        // line 19
+        // line 21
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 19, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 21, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
-            // line 20
+            // line 22
             echo "                <div class=\"col-3\">
                     <div class=\"car text-center\" >
                         <div style=\"border-style: groove;background-color: white\" >
                             ";
-            // line 24
+            // line 26
             echo "                            <div id=\"easyadmin-lightbox-";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 24), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 26), "html", null, true);
             echo "\" class=\"easyadmin-lightbox\">
                                 ";
-            // line 26
+            // line 28
             echo "                                <img src=\"";
             echo twig_escape_filter($this->env, $this->extensions['Vich\UploaderBundle\Twig\Extension\UploaderExtension']->asset($context["product"], "imageFile"), "html", null, true);
             echo "\" class=\"image-style\"  height=\"200\" alt=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "nom", [], "any", false, false, false, 26), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "nom", [], "any", false, false, false, 28), "html", null, true);
             echo "\">
                             </div>
                             <div class=\"card-body\" style=\"background-color: #F5F5F5\">
                                 <h5 class=\"card-title\">
                                     <a id=\"produits\" href=\"#\">";
-            // line 30
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "nom", [], "any", false, false, false, 30), "html", null, true);
+            // line 32
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "nom", [], "any", false, false, false, 32), "html", null, true);
             echo "</a>
                                 </h5>
                                 <p class=\"card-text\">
                                     ";
-            // line 33
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "description", [], "any", false, false, false, 33), "html", null, true);
+            // line 35
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "description", [], "any", false, false, false, 35), "html", null, true);
             echo "
                                 </p>
                                 <div class=\"text-danger\" >";
-            // line 35
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "prix", [], "any", false, false, false, 35), "html", null, true);
+            // line 37
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "prix", [], "any", false, false, false, 37), "html", null, true);
             echo " €</div>
                                 <p class=\"card-text\">
                                     <a class=\"btn btn-primary\" role=\"button\"  href=\"";
-            // line 37
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.show", ["slug" => twig_get_attribute($this->env, $this->source, $context["product"], "slug", [], "any", false, false, false, 37), "id" => twig_get_attribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 37)]), "html", null, true);
+            // line 39
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.show", ["slug" => twig_get_attribute($this->env, $this->source, $context["product"], "slug", [], "any", false, false, false, 39), "id" => twig_get_attribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 39)]), "html", null, true);
             echo "\">Details...</a>
                                 </p>
                             </div>
@@ -165,11 +167,11 @@ class __TwigTemplate_fecf7faf8e02b5a35e02ff40e5e44c2484618eaa444a40a90ce8909a833
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['product'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 44
+        // line 46
         echo "            <div class=\"navigation navigator-center\">
                 ";
-        // line 45
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 45, $this->source); })()));
+        // line 47
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 47, $this->source); })()));
         echo "
             </div>
 
@@ -197,7 +199,7 @@ class __TwigTemplate_fecf7faf8e02b5a35e02ff40e5e44c2484618eaa444a40a90ce8909a833
 
     public function getDebugInfo()
     {
-        return array (  172 => 45,  169 => 44,  156 => 37,  151 => 35,  146 => 33,  140 => 30,  130 => 26,  125 => 24,  120 => 20,  116 => 19,  107 => 15,  98 => 11,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  174 => 47,  171 => 46,  158 => 39,  153 => 37,  148 => 35,  142 => 32,  132 => 28,  127 => 26,  122 => 22,  118 => 21,  108 => 16,  99 => 12,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -211,13 +213,15 @@ class __TwigTemplate_fecf7faf8e02b5a35e02ff40e5e44c2484618eaa444a40a90ce8909a833
 
     <div class=\"container mt-4\">
         <h3>{%trans%}Product Catalog{%endtrans%}</h3>
-        <p class=\"card-text\">
+       <div style=\"display:flex; justify-content: flex-end;\">
+        <p class=\"card-text\" style=\"margin-right:20px;\" >
             <a class=\"btn btn-primary\" role=\"button\"  href=\"{{ path('product.export.json') }}\">{%trans%}Export json products{%endtrans%}</a>
         </p>
 
         <p class=\"card-text\">
             <a class=\"btn btn-primary\" role=\"button\"  href=\"{{ path('product.export.csv') }}\">{%trans%}Export CSV products{%endtrans%}</a>
         </p>
+       </div>
 
         <div class=\"row flex\">
             {% for product in products %}

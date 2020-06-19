@@ -234,3 +234,13 @@ b709ae,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_loc
 f19f58,127.0.0.1,GET,http://127.0.0.1:8000/add/6?qte=4,1592524625,,302
 f728bd,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CBasketController%253A%253Anbarticle,1592524625,d3d31a,200
 d3d31a,127.0.0.1,GET,http://127.0.0.1:8000/basket?id=6,1592524625,,200
+3a2950,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CBasketController%253A%253Anbarticle,1592526361,1ed277,200
+1ed277,127.0.0.1,GET,http://127.0.0.1:8000/,1592526361,,200
+d8edae,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CBasketController%253A%253Anbarticle,1592526364,bea117,200
+bea117,127.0.0.1,GET,http://127.0.0.1:8000/product/d-product-5-5,1592526364,,200
+42c610,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CBasketController%253A%253Anbarticle,1592526366,2c4117,200
+2c4117,127.0.0.1,GET,http://127.0.0.1:8000/,1592526366,,200
+0d0ab8,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CBasketController%253A%253Anbarticle,1592526392,07bcba,200
+07bcba,127.0.0.1,GET,http://127.0.0.1:8000/basket,1592526392,,200
+34711b,127.0.0.1,GET,http://127.0.0.1:8000/_fragment?_path=_format%3Dhtml%26_locale%3Den%26_controller%3DApp%255CController%255CBasketController%253A%253Anbarticle,1592526417,461fdd,200
+461fdd,127.0.0.1,GET,http://127.0.0.1:8000/,1592526417,,200

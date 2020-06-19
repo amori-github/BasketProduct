@@ -37,12 +37,18 @@ Développer une application contenant un catalogue de produits et une gestion de
   sont pas à traduire, seule l’interface est à adapter)
 
 ### Installation
-     git clone https://github.com/amori-github/GestFormationV1.git
+
+Importer le projet depuis github
+   
+     git clone https://github.com/amori-github/BasketProduct.git
+     
+Exécuter le composer install pour instalez tous les dépendances du projet
+    
      composer install
 
 ### Configurer la base de données
 
-Les informations de connexion à la base de données sont stockées dans le fichier .env
+Configurer votre base de données dans le fichier .env 
  
     DATABASE_URL="sqlite:///%kernel.project_dir%/var/catalogue.db"
     
