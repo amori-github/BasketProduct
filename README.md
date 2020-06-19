@@ -3,121 +3,80 @@
 
 # Objectif:
 
-  Développer une application contenant un catalogue de produits et une gestion de panier basique.
+Développer une application contenant un catalogue de produits et une gestion de panier basique.
 
 - L’application propose 12 produits au total.
 - Les produits contiennent les champs suivants : id, nom, description, prix.
 - Les produits seront stockés en base de donnée.
 - Le panier sera stocké en session. 
 
-### Tech
+  
+### Tech  
+- Projet Symfony 4.4
+- PHP >= 7.2
+- SQLite
 
-  * Projet Symfony 4.2 
-  * PHP >= 7.1 
-  * SQLite  
+### Détails de l'application
+- Mise en forme simple avec le framework Bootstrap 4 et gestion des assets avec 
+  Symfony Encore
+- Fixtures pour charger les produits en base de données
+- Migrations de base de données
+- Test unitaire du panier : tester le calcul du montant total
+- Test fonctionnel de la page d’accueil : tester le code de la réponse et le nombre de
+  produits affichés
+- Installer un espace d'administration permettant de gérer les produits (​ easyadmin ​ )
+  Sécuriser cet espace d’administration (utilisateur “admin@gmail.com” avec pour mot de passe
+  “adminadmin” de type ​ in_memory) 
+  pour l'accée à l'espace admin tapez -> lien de votre serveur/admin : http://127.0.0.1:8000/admin
+- Produit : ajouter une photo visible sur les pages d’accueil et de détails
+- Produit : ajouter un slug qui servira à afficher la page de détails
+- Page panier : pouvoir modifier les quantités
+- Page panier : pouvoir supprimer un produit
+- Proposer un point d’API renvoyant l’intégralité des produits au format JSON et CSV
+- Permettre au visiteur de choisir la langue du site : fr ou en (les produits et les urls ne
+  sont pas à traduire, seule l’interface est à adapter)
 
 ### Installation
-
-Si vous voulez utiliser un conteneur il faudra installer Docker (Community Edition).
-
-```sh
-cd projetRiadhTalbi\docker-install-symfony
-docker-compose up -d
-```
-Avec la commande vous aurez les identifiants du conteneur
-
-```sh
-docker ps
-```
-
-Vous pouvez installer le nouveau framework Symfony avec la commande
-
-```sh
-docker exec id_du_conteneur composer create-project symfony/website-skeleton catalogue
-```
-La methode decrite si-dessus vous donne tout ce qui est necessaire pour faire tourner votre application web sinon proceder comme suit :
-
-Pour créer application catalogue, assurez-vous d’abord que vous utilisez PHP 7.1 ou supérieur et que [composer](https://getcomposer.org/download/) est installé. Sinon, commencez par installer [Composer globalement](https://symfony.com/doc/current/setup/composer.html) sur votre système.
-Créez votre nouveau projet en exécutant:
-
-```sh
-$ composer create-project symfony/website-skeleton ProductCatalogue
-```
-Lancer votre application Symfony
-
-```sh
-$ cd catalogue
-$ composer require symfony/web-server-bundle --dev
-$ php bin/console server:run
-```
+     git clone https://github.com/amori-github/GestFormationV1.git
+     composer install
 
 ### Configurer la base de données
 
-Les informations de connexion à la base de données sont stockées sous forme de variable d’environnement appelée  DATABASE_URL. Pour le développement, vous pouvez trouver et personnaliser cet intérieur .env:
-
-```sh
-# .env (or override DATABASE_URL in .env.local to avoid committing your changes)
-# customize this line! to use sqlite:
-DATABASE_URL="sqlite:///%kernel.project_dir%/var/catalogue.db"
-```
-Maintenant que vos paramètres de connexion sont configurés, Doctrine peut créer la db_name base de données pour vous:
-```sh
-$ php bin/console doctrine:database:create
-```
-Créer une classe d'entité Product
-Vous pouvez utiliser la make:entity commande pour créer cette classe et tous les champs dont vous avez besoin. La commande vous posera quelques questions - répondez comme ci-dessous:
-```sh
-$ php bin/console make:entity
-Class name of the entity to create or update:
-> Product
- to stop adding fields):
-> nom
-Field type (enter ? to see all types) [string]:
-> string
-Field length [255]:
-> 255
-Can this field be null in the database (nullable) (yes/no) [no]:
-> no
- to stop adding fields):
-> prix
-Field type (enter ? to see all types) [string]:
-> float
-Can this field be null in the database (nullable) (yes/no) [no]:
-> no
- to stop adding fields):
-> description
-Field type (enter ? to see all types) [string]:
-> text
-(press enter again to finish)
-```
-### Migrations: Création des tables / schémas de la base de données 
-La Productclasse est entièrement configurée et prête à être enregistrée dans une producttable. Si vous venez de définir cette classe, votre base de données ne contient pas encore la product table. Pour l'ajouter, vous pouvez utiliser DoctrineMigrationsBundle , qui est déjà installé:
-```sh
-$ php bin/console make:migration
-```
-Consultez la nouvelle migration "src / Migrations / Version20180207231217.php" Puis: exécutez la migration avec php bin / console doctrine: migrations: migrate
-```sh
-$ php bin/console doctrine:migrations:migrate
-```
-### Dummy Data Fixtures
+Les informations de connexion à la base de données sont stockées dans le fichier .env
+ 
+    DATABASE_URL="sqlite:///%kernel.project_dir%/var/catalogue.db"
+    
+Créer la base de donnée en exécutant cette commande    
+ 
+    php bin/console doctrine:database:create
+ 
+### Migrations: 
+On stock nos entités sur notre base de données: 
+    
+    php bin/console make:migration
+ 
+Exécutez la migration :
+ 
+    php bin/console doctrine:migrations:migrate
+ 
+### Data Fixtures
 Doctrine fournit une bibliothèque qui vous permet de charger par programme des données de test dans votre projet (c'est-à-dire des "données de fixture"). Installez-le avec:
-```sh
-composer require doctrine/doctrine-fixtures-bundle --dev
-```
+
+    composer require doctrine/doctrine-fixtures-bundle --dev
+
 Ensuite, utilisez la make:fixturescommande pour générer une classe de fixture vide:
-```sh
-php bin/console make:fixtures
-The class name of the fixtures to create (e.g. AppFixtures):
-> ProductFixture
-```
+ 
+    php bin/console make:fixtures
+    The class name of the fixtures to create (e.g. AppFixtures):
+    > ProductFixture
+
 Personnalisez la nouvelle classe pour charger des Productobjets dans Doctrine:
 ```sh
-// src/DataFixtures/ProductFixture.php
 namespace App\DataFixtures;
 
 use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class ProductFixture extends Fixture
 {
@@ -128,122 +87,155 @@ class ProductFixture extends Fixture
             $lettre_aleatoire=$alphabet[rand(0,25)];
             $product = new Product();
             $product->setNom($lettre_aleatoire.' product '.$i);
+            $product->setImage(' product '.$i.'jpg');
+            $product->setUpdatedAt(new \DateTime('02/06/2020'));
             $product->setDescription('Description du Produit '.$i);
             $product->setPrix(mt_rand(10, 100));
             $manager->persist($product);
         }
 
+
         $manager->flush();
     }
 }
 ```
-Videz la base de données et rechargez toutes les classes de fixture avec:
-```sh
-php bin/console doctrine:fixtures:load
-```
-### compiler les assets 
+Rechargez toutes les classes de fixture:
+
+    php bin/console doctrine:fixtures:load
+
+### Compiler les assets 
 Installer Encore dans votre projet
-```sh
-$ composer require encore
-$ yarn install
- ```
- utiliser Bootstrap  dans votre projet
- ```sh
-$ yarn add bootstrap@4.0.0-beta.3
- ```
-Pour utiliser scss et fontawesome  dans votre projet proceder comme suit:
- ```sh
-$ sass-loader@^7.0.1 node-sass --dev
-$ yarn add --dev @fortawesome/fontawesome-free
- ```
- creer un nouveau dossier scss puis un fichien app.scss sous assets et le remplir comme suit:
- Modifier le fichier webpack.config.js fichier à la racine de votre projet comme suit:
- ```sh
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
- ```
+ 
+    composer require symfony/webpack-encore-bundle
+    yarn install
+    
+si vous rencontrez des problémes, assurez-vous d'installer Node.js et également le gestionnaire de packages Yarn.
+ou consulter la documentation [documentation](https://symfony.com/doc/4.4/frontend/encore/installation.html) 
+ 
+Utiliser Bootstrap 4 dans votre projet
+ 
+    yarn add bootstrap --dev
+ 
+Pour utiliser scss et les icones fontawesome dans votre projet exécuter ces commandes:
+
+    sass-loader@^7.0.1 node-sass --dev
+    yarn add --dev @fortawesome/fontawesome-free
+
+Créer un nouveau dossier scss puis un fichien app.scss sous assets et le remplir comme suit:
+
+    @import "node_modules/bootstrap/scss/bootstrap";
+    @import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+Vérifier que votre fichier webpack.config.je qui se trouve dans la racine de votre projet est comme suit :
 ```sh
  var Encore = require('@symfony/webpack-encore');
+ 
+ // Manually configure the runtime environment if not already configured yet by the "encore" command.
+ // It's useful when you use tools that rely on webpack.config.js file.
+ if (!Encore.isRuntimeEnvironmentConfigured()) {
+     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+ }
+ 
+ Encore
+     // directory where compiled assets will be stored
+     .setOutputPath('public/build/')
+     // public path used by the web server to access the output path
+     .setPublicPath('/build')
+     // only needed for CDN's or sub-directory deploy
+     //.setManifestKeyPrefix('build/')
+ 
+     /*
+      * ENTRY CONFIG
+      *
+      * Add 1 entry for each "page" of your app
+      * (including one that's included on every page - e.g. "app")
+      *
+      * Each entry will result in one JavaScript file (e.g. app.js)
+      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
+      */
+     .addEntry('app', './assets/js/app.js')
+     //.addEntry('page1', './assets/js/page1.js')
+     //.addEntry('page2', './assets/js/page2.js')
+ 
+     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
+     .splitEntryChunks()
+ 
+     // will require an extra script tag for runtime.js
+     // but, you probably want this, unless you're building a single-page app
+     .enableSingleRuntimeChunk()
+ 
+     /*
+      * FEATURE CONFIG
+      *
+      * Enable & configure other features below. For a full
+      * list of features, see:
+      * https://symfony.com/doc/current/frontend.html#adding-more-features
+      */
+     .cleanupOutputBeforeBuild()
+     .enableBuildNotifications()
+     .enableSourceMaps(!Encore.isProduction())
+     // enables hashed filenames (e.g. app.abc123.css)
+     .enableVersioning(Encore.isProduction())
+ 
+     // enables @babel/preset-env polyfills
+     .configureBabelPresetEnv((config) => {
+         config.useBuiltIns = 'usage';
+         config.corejs = 3;
+     })
+ 
+     // enables Sass/SCSS support
+     .enableSassLoader()
+ 
+     // uncomment if you use TypeScript
+     //.enableTypeScriptLoader()
+ 
+     // uncomment to get integrity="..." attributes on your script & link tags
+     // requires WebpackEncoreBundle 1.4 or higher
+     //.enableIntegrityHashes(Encore.isProduction())
+ 
+     // uncomment if you're having problems with a jQuery plugin
+     //.autoProvidejQuery()
+ 
+     // uncomment if you use API Platform Admin (composer req api-admin)
+     //.enableReactPreset()
+     //.addEntry('admin', './assets/js/admin.js')
+ ;
+ 
+ module.exports = Encore.getWebpackConfig();
 
-Encore
-    // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
-    // public path used by the web server to access the output path
-    .setPublicPath('/build')
-    // only needed for CDN's or sub-directory deploy
-    //.setManifestKeyPrefix('build/')
-
-    // ....
-    .addEntry('app', './assets/scss/app.scss')
-
-    // will require an extra script tag for runtime.js
-    // but, you probably want this, unless you're building a single-page app
-    .enableSingleRuntimeChunk()
-
-    /*
-     * FEATURE CONFIG
-     *
-     * Enable & configure other features below. For a full
-     * list of features, see:
-     * https://symfony.com/doc/current/frontend.html#adding-more-features
-     */
-    .cleanupOutputBeforeBuild()
-    .enableBuildNotifications()
-    .enableSourceMaps(!Encore.isProduction())
-    // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
-
-    // enables Sass/SCSS support
-    .enableSassLoader()
-
-    // .....
-;
-
-module.exports = Encore.getWebpackConfig();
  ```
- Pour construire les actifs, exécutez:
+Exécuter cette commande Pour construire les actifs dans le fichier public [documentation](https://symfony.com/doc/4.4/frontend/encore/simple-example.html):
+
+    yarn encore dev --watch
+
+Vérifier que les 2 links: app.css et app.js sont dans votre page de base, "base.html.twig" comme suit:
 ```sh
-$ yarn encore dev --watch
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('app') }}
+ {% endblock %}
+
+ {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+ {% endblock %}
 ```
-dans votre fichier de mise en page de base. faire ce-ci:
-```sh
-{% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('build/app.css') }}" >
-{% endblock %}
-{% block javascripts %}
-<script src="{{ asset('build/app.js') }}"></script>
-{% endblock %}
-```
+### Lancer votre application BasketProduct
+en installant le web-service-bundle
+
+    composer require symfony/web-server-bundle --dev
+    php bin/console server:run
+    
 ### Developpement
-Maintenant que vous avez une application Symfony entièrement fonctionnelle, vous pouvez commencer le développem.
-Pour voir le resultat:
-```sh
-$ php bin/console server:run
-#Tapez le lien ci-dessous sur votre navigateur web
-http://localhost:8000
-```
+
 ## Tester votre application
 
-Pour commencer, il nous faut établir la liste des URL de l'application afin de connaître la somme de travail que nous avons devant nous.
-Je vous invite donc à vous placer à la racine du projet fraîchement installé, puis à taper la commande suivante dans votre outil de lignes de commande pour lister toutes les routes de l'application :
-```sh
-$ php bin/console debug:router
-```
-Nous n'allons pas tester toutes les routes de l'application. Nous nous concentrerons uniquement sur les routes autres que celles provenant du framework Symfony (toutes celles qui ne commencent pas par _).
-Ensuite pour les tests, il faut le composant PHPUnit :
-```sh
-$ composer req symfony/phpunit-bridge
-```
+installer le composant PHPUnit :
+ 
+    composer req symfony/phpunit-bridge
+ 
 Et pour les tests fonctionnels on va avoir besoin de :
-```sh
-$ composer require --dev symfony/browser-kit symfony/css-selector
-```
-Et comme on est feignant on va faire appelle au maker pour nous créer nos classes :
-```sh
-$ php bin/console make:unit-test
-$ php bin/console make:functional-test
-```
-On va maintenant faire un peu de config, dans le fichier config/packages/test/framework.yaml, nous allons lui dire que nous allons utiliser les sessions (juste décommenter les 2 dernières lignes) :
+ 
+    composer require --dev symfony/browser-kit symfony/css-selector
+
+dans le fichier config/packages/test/framework.yaml, décommenter les 2 dernières lignes pour utiliser les session:
 ```sh
 framework:
     test: ~
@@ -251,13 +243,14 @@ framework:
     session:
         storage_id: session.storage.mock_file
  ```
-Et surtout ajouter cette ligne dans le fichier phpunit.xml.dist, c’est sur cette base de données que va se connecter phpunit pour effectuer qui ont besoin de votre base :
+dans le phpunit.xml.dist, ajouter la ligne de configuration de votre base
 ```sh
-<!-- define your env variables for the test env here -->
-<env name="DATABASE_URL" value="mysqlite:///%kernel.project_dir%/catalogue" />
+<php>
+        <server name="DATABASE_URL" value = "sqlite:///%kernel.project_dir%/var/productcataloge.db" />
+</php>
  ```
- Vous pouvez déjà exécuter les tests par défaut en faisant simplement :
-```sh
-$ php bin/phpunit
-  ```
+En fin vous pouvez exécuter les tests avec  :
+
+    php bin/phpunit
+
 

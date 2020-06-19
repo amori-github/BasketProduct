@@ -55,7 +55,7 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
     ";
         // line 6
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 10
+        // line 9
         echo "</head>
 <body>
 <header>
@@ -71,13 +71,13 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
         <ul class=\"navbar-nav mr-auto\">
             <li class=\"nav-item\">
                 <a class=\"nav-link ";
-        // line 24
-        if (((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context)) && 0 === twig_compare((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context) ? $context["Current_menu"] : (function () { throw new RuntimeError('Variable "Current_menu" does not exist.', 24, $this->source); })()), "products"))) {
+        // line 23
+        if (((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context)) && 0 === twig_compare((isset($context["Current_menu"]) || array_key_exists("Current_menu", $context) ? $context["Current_menu"] : (function () { throw new RuntimeError('Variable "Current_menu" does not exist.', 23, $this->source); })()), "products"))) {
             echo "active";
         }
         echo "\"
                    href=\"";
-        // line 25
+        // line 24
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("product.index");
         echo "\">";
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\TranslationExtension')->trans("Catalog", [], "messages");
@@ -88,19 +88,19 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 
         <ul class=\"navbar-nav mr-auto\">
            ";
-        // line 31
+        // line 30
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["locales"]) || array_key_exists("locales", $context) ? $context["locales"] : (function () { throw new RuntimeError('Variable "locales" does not exist.', 31, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["locales"]) || array_key_exists("locales", $context) ? $context["locales"] : (function () { throw new RuntimeError('Variable "locales" does not exist.', 30, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["locale"]) {
-            // line 32
+            // line 31
             echo "                ";
-            if (0 !== twig_compare($context["locale"], twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 32, $this->source); })()), "request", [], "any", false, false, false, 32), "locale", [], "any", false, false, false, 32))) {
-                // line 33
+            if (0 !== twig_compare($context["locale"], twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 31, $this->source); })()), "request", [], "any", false, false, false, 31), "locale", [], "any", false, false, false, 31))) {
+                // line 32
                 echo "                    <a href=\"";
                 echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("change_locale", ["locale" => $context["locale"]]), "html", null, true);
                 echo "\">
                         <img src=\"";
-                // line 34
+                // line 33
                 echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl((("icones/" . $context["locale"]) . ".png")), "html", null, true);
                 echo "\" alt=\"";
                 echo twig_escape_filter($this->env, $context["locale"], "html", null, true);
@@ -108,23 +108,23 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
                 echo twig_escape_filter($this->env, $context["locale"], "html", null, true);
                 echo "\">
                        ";
-                // line 36
+                // line 35
                 echo "                    </a>
                 ";
             }
-            // line 38
+            // line 37
             echo "            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['locale'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 39
+        // line 38
         echo "        </ul>
     </div>
 
 
     ";
-        // line 43
+        // line 42
         echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragment(Symfony\Bridge\Twig\Extension\HttpKernelExtension::controller("App\\Controller\\BasketController::nbarticle"));
         echo "
 
@@ -133,11 +133,11 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 </nav>
 </header>
 ";
-        // line 49
+        // line 48
         $this->displayBlock('body', $context, $blocks);
-        // line 50
+        // line 49
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 54
+        // line 52
         echo "</body>
 </html>
 ";
@@ -182,7 +182,6 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
         echo "        ";
         echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackLinkTags("app");
         echo "
-
     ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -192,7 +191,7 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 
     }
 
-    // line 49
+    // line 48
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -210,7 +209,7 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 
     }
 
-    // line 50
+    // line 49
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -220,11 +219,10 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 51
+        // line 50
         echo "    ";
         echo $this->extensions['Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension']->renderWebpackScriptTags("app");
         echo "
-
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -246,7 +244,7 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 
     public function getDebugInfo()
     {
-        return array (  224 => 51,  214 => 50,  196 => 49,  182 => 7,  172 => 6,  153 => 5,  141 => 54,  139 => 50,  137 => 49,  128 => 43,  122 => 39,  116 => 38,  112 => 36,  104 => 34,  99 => 33,  96 => 32,  92 => 31,  81 => 25,  75 => 24,  59 => 10,  57 => 6,  53 => 5,  47 => 1,);
+        return array (  223 => 50,  213 => 49,  195 => 48,  182 => 7,  172 => 6,  153 => 5,  141 => 52,  139 => 49,  137 => 48,  128 => 42,  122 => 38,  116 => 37,  112 => 35,  104 => 33,  99 => 32,  96 => 31,  92 => 30,  81 => 24,  75 => 23,  59 => 9,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -258,7 +256,6 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
-
     {% endblock %}
 </head>
 <body>
@@ -302,7 +299,6 @@ class __TwigTemplate_dfe02d527f709684e3b4ab85861edf1f0704460e8b970472ff84ca87b79
 {% block body %}{% endblock %}
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
-
 {% endblock %}
 </body>
 </html>

@@ -503,17 +503,12 @@
         <parameter>@WebProfiler/Collector/config.html.twig</parameter>
       </parameter>
     </parameter>
-    <parameter key="console.command.ids" type="collection">
-      <parameter>console.command.public_alias.App\Command\ImportCommand</parameter>
-    </parameter>
+    <parameter key="console.command.ids" type="collection"/>
   </parameters>
   <services>
     <service id="service_container" class="Symfony\Component\DependencyInjection\ContainerInterface" public="true" synthetic="true"/>
     <service id="kernel" class="App\Kernel" public="true" synthetic="true">
       <tag name="routing.route_loader"/>
-    </service>
-    <service id="App\Command\ImportCommand" class="App\Command\ImportCommand" autowire="true" autoconfigure="true">
-      <tag name="console.command"/>
     </service>
     <service id="App\Controller\BasketController" class="App\Controller\BasketController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
@@ -6006,8 +6001,6 @@
         <argument type="service" id="annotations.cached_reader"/>
       </call>
     </service>
-    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Command\ImportCommand" class="App\Command\ImportCommand" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Command\ImportCommand" class="App\Command\ImportCommand" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\BasketController" class="App\Controller\BasketController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\BasketController" class="App\Controller\BasketController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\BasketController" class="App\Controller\BasketController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7233,6 +7226,5 @@
     <service id="argument_resolver.default" alias="debug.argument_resolver.default" public="false"/>
     <service id="argument_resolver.variadic" alias="debug.argument_resolver.variadic" public="false"/>
     <service id="argument_resolver.not_tagged_controller" alias="debug.argument_resolver.not_tagged_controller" public="false"/>
-    <service id="console.command.public_alias.App\Command\ImportCommand" alias="App\Command\ImportCommand" public="true"/>
   </services>
 </container>
